@@ -3,57 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Control - Networking</title>
+    <title>Menú Principal - Networking</title>
     <style>
         body {
-            background-color: #121212;
-            color: white;
             font-family: 'Segoe UI', sans-serif;
+            background: #121212;
+            color: white;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
         }
-        .menu-container {
-            text-align: center;
-            background: #1e1e1e;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid #333;
+        .container { text-align: center; padding: 20px; }
+        h1 { margin-bottom: 40px; color: #00d4ff; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .menu-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
         }
-        h1 { margin-bottom: 30px; color: #00d4ff; }
-        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .main-btn {
-            padding: 20px 40px;
+
+        .btn-menu {
+            padding: 30px 50px;
             font-size: 1.2rem;
             font-weight: bold;
             color: white;
-            background: #252525;
-            border: 2px solid #444;
-            border-radius: 10px;
+            background: #1e1e1e;
+            border: 2px solid #333;
+            border-radius: 15px;
             cursor: pointer;
             text-decoration: none;
-            transition: 0.3s;
-            display: inline-block;
+            transition: all 0.3s ease;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .main-btn:hover {
+
+        .btn-comandos:hover {
             border-color: #00d4ff;
-            background: #00d4ff;
-            color: #121212;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
             transform: translateY(-5px);
         }
+
+        .btn-config:hover {
+            border-color: #28a745;
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .btn-config { color: #28a745; }
+        .btn-comandos { color: #00d4ff; }
+
+        /* Estilo del mensaje de ánimo */
+        .footer-mensaje {
+            margin-top: 60px;
+            font-style: italic;
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            border-top: 1px solid #222;
+            padding-top: 25px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .corazon { color: #ff4d4d; }
     </style>
 </head>
 <body>
 
-    <div class="menu-container">
-        <h1>Selecciona una opción</h1>
-        <div class="btn-group">
-            <a href="comandos.html" class="main-btn">Comandos de Equipos</a>
-            
-            <a href="#" class="main-btn" onclick="alert('Próximamente...')">Configuración de Equipos</a>
+    <div class="container">
+        <h1>Panel de Control Networking</h1>
+        
+        <div class="menu-buttons">
+            <a href="comandos.html" class="btn-menu btn-comandos">COMANDOS DE EQUIPOS</a>
+            <a href="#" class="btn-menu btn-config" onclick="alert('Próximamente...')">CONFIGURACIÓN DE EQUIPOS</a>
+        </div>
+
+        <!-- EL MENSAJE VA AQUÍ ADENTRO -->
+        <div class="footer-mensaje">
+            <p>Epa, respira profundo. No te estreses que todo va a salir bien. <span class="corazon">❤</span><br> 
+            Un error no es el fin del mundo, tomate un café, la paz mental es lo primero. <br>
+            ¡Dale con calma, que tú eres un crack!</p>
         </div>
     </div>
 
