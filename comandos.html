@@ -66,7 +66,7 @@
 
     <div class="header">
         <h1>Mis Comandos de Red</h1>
-        <p>Pasa el cursor para ver la descripción y dale a copiar para el SecureCRT</p>
+        <p>Pasa el cursor para ver la descripción y dale a copiar para que uses tu Comando</p>
     </div>
 
     <div class="nav-tabs">
@@ -80,13 +80,20 @@
     <!-- Sección RAX -->
     <div id="rax" class="command-section active-section">
         <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra el estado de todas las interfaces">show interface status</span>
-            <button class="copy-btn" onclick="copyTo('show interface status')">Copiar</button>
+            <span class="command-text" data-tooltip="Muestra la versión del equipo, modelo, número de serie, recursos de memoria y el tiempo que lleva operativo sin reinicios (uptime).">show version</span>
+            <button class="copy-btn" onclick="copyTo('show version')">Copiar</button>
         </div>
         <div class="command-row">
-            <span class="command-text" data-tooltip="Guarda la configuración actual">write memory</span>
-            <button class="copy-btn" onclick="copyTo('write memory')">Copiar</button>
+            <span class="command-text" data-tooltip="Verifica estado del puerto, si esta habilitado o no, velocidad y dúplex del puerto.">show interface -puerto-></span>
+            <button class="copy-btn" onclick="copyTo('show interface -puerto-')">Copiar</button>
         </div>
+         <div class="command-row">
+            <span class="command-text" data-tooltip="Muestra nombre del puerto">show interface -puerto- description</span>
+            <button class="copy-btn" onclick="copyTo('show interface -puerto- description')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <span class="command-text" data-tooltip="Muestra potencias del puerto">show  transceiver  ddm  -puerto-</span>
+            <button class="copy-btn" onclick="copyTo('show  transceiver  ddm  -puerto-')">Copiar</button>
     </div>
 
     <!-- Sección HUAWEI -->
