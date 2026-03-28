@@ -1,0 +1,2 @@
+# Comandosdos
+comandos equipos 
