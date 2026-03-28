@@ -1,137 +1,94 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comandos Networking</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #121212; color: #e0e0e0; padding: 20px; }
-        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 20px; }
-        .nav-tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
-        button.tab-btn { padding: 12px 24px; cursor: pointer; background: #252525; color: #00d4ff; border: 1px solid #444; border-radius: 8px; font-weight: bold; transition: 0.3s; }
-        button.tab-btn:hover { background: #00d4ff; color: #121212; }
-        button.tab-btn.active { background: #00d4ff; color: #121212; border-color: #00d4ff; }
+<style>
+    /* --- Base y Fondo Único (Identico a index.html) --- */
+    body {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        /* MISMO FONDO CON CAPA DE SUAVIDAD */
+        background: linear-gradient(rgba(248, 249, 250, 0.85), rgba(248, 249, 250, 0.9)), 
+                    url('image_6.png'); 
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
         
-        .command-section { display: none; max-width: 900px; margin: 0 auto; }
-        .active-section { display: block; animation: fadeIn 0.5s; }
+        color: #495057; /* Texto gris oscuro */
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        overflow: hidden;
+    }
 
-        .command-row { 
-            display: flex; 
-            align-items: center; 
-            background: #1e1e1e; 
-            margin-bottom: 8px; 
-            padding: 15px; 
-            border-radius: 8px;
-            border-left: 4px solid #00d4ff;
-        }
-        .command-text { 
-            flex-grow: 1; 
-            font-family: 'Consolas', monospace; 
-            font-size: 1.1em;
-            cursor: help; 
-            position: relative;
-        }
-        .command-text:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            background: #444;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 4px;
-            bottom: 125%;
-            left: 0;
-            font-size: 14px;
-            white-space: pre-wrap;
-            z-index: 100;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            width: max-content;
-            max-width: 300px;
-        }
-        .copy-btn { 
-            margin-left: 15px; 
-            cursor: pointer; 
-            padding: 8px 15px; 
-            background: #28a745; 
-            border: none; 
-            color: white; 
-            border-radius: 5px; 
-            font-weight: bold;
-        }
-        .copy-btn:active { transform: scale(0.95); }
+    /* --- Contenedor Único (Mismo efecto vidrio y sombra) --- */
+    .container { 
+        text-align: center; 
+        padding: 40px; 
+        background: rgba(255, 255, 255, 0.95); /* Efecto vidrio esmerilado */
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 123, 255, 0.05); /* Sombra azul ultra sutil */
+        backdrop-filter: blur(5px);
+        max-width: 900px;
+        width: 100%;
+        margin: 20px;
+    }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-</head>
-<body>
+    /* --- Título de Comandos (Identico a index.html) --- */
+    h1 { 
+        margin-bottom: 30px; 
+        color: #007bff; /* Azul Cielo Suave */
+        text-transform: uppercase; 
+        letter-spacing: 3px; 
+        font-weight: 300; 
+        font-size: 1.8rem;
+    }
 
-    <div class="header">
-        <h1>Mis Comandos de Red</h1>
-        <p>Pasa el cursor para ver la descripción y dale a copiar para que uses tu Comando</p>
-    </div>
+    /* --- El footer-mensaje (Identico a index.html) --- */
+    .footer-mensaje {
+        margin-top: 50px;
+        font-style: italic;
+        color: #868e96; /* Gris medio suave */
+        font-size: 1.1rem;
+        line-height: 1.8;
+        border-top: 1px solid #e9ecef; /* Línea divisoria muy clarita */
+        padding-top: 25px;
+        max-width: 550px;
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: 300;
+    }
+    .corazon { 
+        color: #007bff; /* Corazón azul, no rojo, para mantener la calma */
+        opacity: 0.6;
+    }
 
-    <div class="nav-tabs">
-        <button class="tab-btn active" onclick="showTab(event, 'rax')">RAX</button>
-        <button class="tab-btn" onclick="showTab(event, 'rad')">RAD</button>
-        <button class="tab-btn" onclick="showTab(event, 'huawei')">HUAWEI</button>
-        <button class="tab-btn" onclick="showTab(event, 'cisco')">CISCO</button>
-        <button class="tab-btn" onclick="showTab(event, 'asr')">ASR</button>
-    </div>
+    /* --- REAPLICAR ESTILOS ESPECÍFICOS DE COMANDOS --- */
+    /* Mismos colores y efectos hover para los botones de equipos */
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 25px; }
+    button.tab-btn { 
+        padding: 10px 20px; 
+        cursor: pointer; 
+        background: #e3f2fd; /* Fondo Azul Pastel muy claro */
+        color: #007bff; /* Texto Azul Cielo */
+        border: 2px solid #b3e5fc; 
+        border-radius: 8px; 
+        font-weight: bold; 
+        transition: 0.3s; 
+    }
+    button.tab-btn:hover { background: #007bff; color: #ffffff; }
+    button.tab-btn.active { background: #007bff; color: #ffffff; border-color: #007bff; }
+    
+    .command-section { display: none; }
+    .active-section { display: block; animation: fadeIn 0.5s; }
 
-    <!-- Sección RAX -->
-    <div id="rax" class="command-section active-section">
-        <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra la versión del equipo, modelo, número de serie, recursos de memoria y el tiempo que lleva operativo sin reinicios (uptime).">show version</span>
-            <button class="copy-btn" onclick="copyTo('show version')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <span class="command-text" data-tooltip="Verifica estado del puerto, si esta habilitado o no, velocidad y dúplex del puerto.">show interface -puerto-</span>
-            <button class="copy-btn" onclick="copyTo('show interface -puerto-')">Copiar</button>
-        </div>
-         <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra nombre del puerto">show interface -puerto- description</span>
-            <button class="copy-btn" onclick="copyTo('show interface -puerto- description')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra potencias del puerto">show  transceiver  ddm  -puerto-</span>
-            <button class="copy-btn" onclick="copyTo('show  transceiver  ddm  -puerto-')">Copiar</button>
-        </div>
-          <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra las ultimas caida del puerto que necesites">show  logging file | include -puerto-</span>
-            <button class="copy-btn" onclick="copyTo('show  logging file | include -puerto-')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra la hora del equipo, te ayuda a verificar logs">show  clock</span>
-            <button class="copy-btn" onclick="copyTo('show  clock')">Copiar</button>
-        </div>
-
-    <!-- Sección HUAWEI -->
-    <div id="huawei" class="command-section">
-        <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra la tabla de enrutamiento IP">display ip routing-table</span>
-            <button class="copy-btn" onclick="copyTo('display ip routing-table')">Copiar</button>
-        </div>
-    </div>
-
-    <script>
-        function showTab(evt, teamId) {
-            document.querySelectorAll('.command-section').forEach(s => s.classList.remove('active-section'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(teamId).classList.add('active-section');
-            evt.currentTarget.classList.add('active');
-        }
-
-        function copyTo(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                const originalText = btn.innerText;
-                btn.innerText = "¡Listo!";
-                btn.style.background = "#007bff";
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = "#28a745";
-                }, 1000);
-            });
-        }
-    </script>
-</body>
-</html>
+    /* Mismos colores y bordes para las filas de comandos */
+    .command-row { 
+        display: flex; 
+        align-items: center; 
+        background: #ffffff; /* Fondo blanco puro en las filas */
+        margin-bottom: 8px; 
+        padding: 12px; 
+        border-radius: 8px;
+        border-left: 4px solid #00d4ff; /* Borde izquierdo con azul neón para resalte */
+        box-shadow: 0 2px 5px rgba(0, 123, 255, 0.05); /* Sombra ultra sutil */
+    }
+    .command-text { 
+        flex-grow: 1;
