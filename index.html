@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandos Networking</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #121212; color: #e0e0e0; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 20px; }
+        .nav-tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
+        button.tab-btn { padding: 12px 24px; cursor: pointer; background: #252525; color: #00d4ff; border: 1px solid #444; border-radius: 8px; font-weight: bold; transition: 0.3s; }
+        button.tab-btn:hover { background: #00d4ff; color: #121212; }
+        button.tab-btn.active { background: #00d4ff; color: #121212; border-color: #00d4ff; }
+        
+        .command-section { display: none; max-width: 900px; margin: 0 auto; }
+        .active-section { display: block; animation: fadeIn 0.5s; }
+
+        .command-row { 
+            display: flex; 
+            align-items: center; 
+            background: #1e1e1e; 
+            margin-bottom: 8px; 
+            padding: 15px; 
+            border-radius: 8px;
+            border-left: 4px solid #00d4ff;
+        }
+        .command-text { 
+            flex-grow: 1; 
+            font-family: 'Consolas', monospace; 
+            font-size: 1.1em;
+            cursor: help; 
+            position: relative;
+        }
+        .command-text:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background: #444;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            bottom: 125%;
+            left: 0;
+            font-size: 14px;
+            white-space: pre-wrap;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            width: max-content;
+            max-width: 300px;
+        }
+        .copy-btn { 
+            margin-left: 15px; 
+            cursor: pointer; 
+            padding: 8px 15px; 
+            background: #28a745; 
+            border: none; 
+            color: white; 
+            border-radius: 5px; 
+            font-weight: bold;
+        }
+        .copy-btn:active { transform: scale(0.95); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Mis Comandos de Red</h1>
+        <p>Pasa el cursor para ver la descripción y dale a copiar para el SecureCRT</p>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="showTab(event, 'rax')">RAX</button>
+        <button class="tab-btn" onclick="showTab(event, 'rad')">RAD</button>
+        <button class="tab-btn" onclick="showTab(event, 'huawei')">HUAWEI</button>
+        <button class="tab-btn" onclick="showTab(event, 'cisco')">CISCO</button>
+        <button class="tab-btn" onclick="showTab(event, 'asr')">ASR</button>
+    </div>
+
+    <!-- Sección RAX -->
+    <div id="rax" class="command-section active-section">
+        <div class="command-row">
+            <span class="command-text" data-tooltip="Muestra el estado de todas las interfaces">show interface status</span>
+            <button class="copy-btn" onclick="copyTo('show interface status')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <span class="command-text" data-tooltip="Guarda la configuración actual">write memory</span>
+            <button class="copy-btn" onclick="copyTo('write memory')">Copiar</button>
+        </div>
+    </div>
+
+    <!-- Sección HUAWEI -->
+    <div id="huawei" class="command-section">
+        <div class="command-row">
+            <span class="command-text" data-tooltip="Muestra la tabla de enrutamiento IP">display ip routing-table</span>
+            <button class="copy-btn" onclick="copyTo('display ip routing-table')">Copiar</button>
+        </div>
+    </div>
+
+    <script>
+        function showTab(evt, teamId) {
+            document.querySelectorAll('.command-section').forEach(s => s.classList.remove('active-section'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(teamId).classList.add('active-section');
+            evt.currentTarget.classList.add('active');
+        }
+
+        function copyTo(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.innerText = "¡Listo!";
+                btn.style.background = "#007bff";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "#28a745";
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
