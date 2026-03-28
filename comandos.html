@@ -3,70 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comandos Networking</title>
+    <title>Networking Commands Hub</title>
+    <!-- Icono de red para la pestaña del navegador -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/606/606200.png">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #121212; color: #e0e0e0; padding: 20px; }
-        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 20px; }
-        .nav-tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
-        button.tab-btn { padding: 12px 24px; cursor: pointer; background: #252525; color: #00d4ff; border: 1px solid #444; border-radius: 8px; font-weight: bold; transition: 0.3s; }
-        button.tab-btn:hover { background: #00d4ff; color: #121212; }
-        button.tab-btn.active { background: #00d4ff; color: #121212; border-color: #00d4ff; }
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --primary: #00d4ff;
+            --success: #28a745;
+            --text: #e0e0e0;
+            --border: #333;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text); 
+            padding: 20px; 
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header { 
+            text-align: center; 
+            border-bottom: 2px solid var(--border); 
+            padding-bottom: 20px; 
+            margin-bottom: 20px; 
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .nav-tabs { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            justify-content: center; 
+            margin-bottom: 30px; 
+        }
+
+        button.tab-btn { 
+            padding: 12px 20px; 
+            cursor: pointer; 
+            background: #252525; 
+            color: var(--primary); 
+            border: 1px solid #444; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button.tab-btn:hover { background: var(--primary); color: #121212; }
+        button.tab-btn.active { background: var(--primary); color: #121212; border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); }
         
-        .command-section { display: none; max-width: 900px; margin: 0 auto; }
-        .active-section { display: block; animation: fadeIn 0.5s; }
+        .command-section { display: none; width: 100%; max-width: 900px; }
+        .active-section { display: block; animation: fadeIn 0.4s ease-out; }
 
         .command-row { 
             display: flex; 
             align-items: center; 
-            background: #1e1e1e; 
-            margin-bottom: 8px; 
+            background: var(--card-bg); 
+            margin-bottom: 12px; 
             padding: 15px; 
-            border-radius: 8px;
-            border-left: 4px solid #00d4ff;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+            transition: transform 0.2s, background 0.2s;
         }
+
+        .command-row:hover { 
+            transform: translateX(8px); 
+            background: #252525; 
+        }
+
+        .command-info { flex-grow: 1; }
+
         .command-text { 
-            flex-grow: 1; 
-            font-family: 'Consolas', monospace; 
+            display: block;
+            font-family: 'Consolas', 'Monaco', monospace; 
             font-size: 1.1em;
-            cursor: help; 
-            position: relative;
-        }
-        .command-text:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            background: #444;
             color: #fff;
-            padding: 8px 12px;
-            border-radius: 4px;
-            bottom: 125%;
-            left: 0;
-            font-size: 14px;
-            white-space: pre-wrap;
-            z-index: 100;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            width: max-content;
-            max-width: 300px;
+            margin-bottom: 4px;
         }
+
+        .command-desc {
+            font-size: 0.85em;
+            color: #888;
+            display: block;
+        }
+
         .copy-btn { 
             margin-left: 15px; 
             cursor: pointer; 
-            padding: 8px 15px; 
-            background: #28a745; 
+            padding: 10px 15px; 
+            background: var(--success); 
             border: none; 
             color: white; 
-            border-radius: 5px; 
+            border-radius: 6px; 
             font-weight: bold;
+            min-width: 90px;
+            transition: all 0.2s;
         }
-        .copy-btn:active { transform: scale(0.95); }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .copy-btn:active { transform: scale(0.9); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) {
+            .command-row { flex-direction: column; align-items: flex-start; }
+            .copy-btn { margin-left: 0; margin-top: 10px; width: 100%; }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>Mis Comandos de Red</h1>
-        <p>Pasa el cursor para ver la descripción y dale a copiar para el SecureCRT</p>
+        <p>Selecciona el vendor y copia el comando para SecureCRT / Putty</p>
     </div>
 
     <div class="nav-tabs">
@@ -77,70 +133,108 @@
         <button class="tab-btn" onclick="showTab(event, 'asr')">ASR</button>
     </div>
 
-    <!-- Sección RAX -->
+    <!-- SECCIÓN RAX -->
     <div id="rax" class="command-section active-section">
         <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra el estado de todas las interfaces en un CPE que tenga NNI y UNI">show interface 
-            </span>
-            <button class="copy-btn" onclick="copyTo('show interface')">Copiar</button>
+            <div class="command-info">
+                <span class="command-text">show interface</span>
+                <span class="command-desc">Estado general de interfaces (NNI/UNI)</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show interface', event)">Copiar</button>
         </div>
         <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra serial del equipo, Mac del equipo, ultimo reinicio, Modelo del equipo">show version</span>
-            <button class="copy-btn" onclick="copyTo('show version')">Copiar</button>
-        </div>
-            <div id="rax" class="command-section active-section">
-        <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra el estado de todas las interfaces que deseas, negociación, duplex y si esta habilitado">show interface --puerto-- description
-            </span>
-            <button class="copy-btn" onclick="copyTo('show interface --puerto-- description')">Copiar</button>
+            <div class="command-info">
+                <span class="command-text">show version</span>
+                <span class="command-desc">Serial, MAC, Uptime y Modelo</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show version', event)">Copiar</button>
         </div>
         <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra estado de potencias">show transceiver  ddm --puerto--</span>
-            <button class="copy-btn" onclick="copyTo('show transceiver  ddm ')">Copiar</button>
-        </div>
- </div>
-        <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra posibles caidas de puertos">show  logging  file | include --portx--</span>
-            <button class="copy-btn" onclick="copyTo('show  logging  file | include ')">Copiar</button>
-        </div>
-            <div id="rax" class="command-section active-section">
-        <div class="command-row">
-            <span class="command-text" data-tooltip="muestra hora actual del equipo">show  clock</span>
-            <button class="copy-btn" onclick="copyTo('show  clock')">Copiar</button>
+            <div class="command-info">
+                <span class="command-text">show interface --puerto-- description</span>
+                <span class="command-desc">Negociación, duplex y estado administrativo</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show interface --puerto-- description', event)">Copiar</button>
         </div>
         <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra la configuracion del puerto: vlan, acceso o troncal, descripción...">show running-config  interface --puerto-</span>
-            <button class="copy-btn" onclick="copyTo('sho running-config  interface ')">Copiar</button>
+            <div class="command-info">
+                <span class="command-text">show transceiver ddm --puerto--</span>
+                <span class="command-desc">Lectura de potencias ópticas (DDM)</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show transceiver ddm ', event)">Copiar</button>
         </div>
-                
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show logging file | include --port--</span>
+                <span class="command-desc">Buscar caídas o logs específicos de un puerto</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show logging file | include ', event)">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show clock</span>
+                <span class="command-desc">Verificar hora actual del sistema</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show clock', event)">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show running-config interface --puerto--</span>
+                <span class="command-desc">Configuración actual: VLANs, MTU, modo</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show running-config interface ', event)">Copiar</button>
+        </div>
     </div>
 
-    <!-- Sección HUAWEI -->
+    <!-- SECCIÓN HUAWEI -->
     <div id="huawei" class="command-section">
         <div class="command-row">
-            <span class="command-text" data-tooltip="Muestra la tabla de enrutamiento IP">display ip routing-table</span>
-            <button class="copy-btn" onclick="copyTo('display ip routing-table')">Copiar</button>
+            <div class="command-info">
+                <span class="command-text">display ip routing-table</span>
+                <span class="command-desc">Tabla de enrutamiento IP completa</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('display ip routing-table', event)">Copiar</button>
         </div>
     </div>
 
+    <!-- SECCIONES POR COMPLETAR -->
+    <div id="rad" class="command-section"><p style="text-align:center">Pendiente cargar comandos RAD...</p></div>
+    <div id="cisco" class="command-section"><p style="text-align:center">Pendiente cargar comandos CISCO...</p></div>
+    <div id="asr" class="command-section"><p style="text-align:center">Pendiente cargar comandos ASR...</p></div>
+
     <script>
+        // Función para cambiar entre pestañas
         function showTab(evt, teamId) {
+            // Ocultar todas las secciones
             document.querySelectorAll('.command-section').forEach(s => s.classList.remove('active-section'));
+            // Desactivar todos los botones
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(teamId).classList.add('active-section');
-            evt.currentTarget.classList.add('active');
+            
+            // Mostrar la seleccionada
+            const target = document.getElementById(teamId);
+            if(target) {
+                target.classList.add('active-section');
+                evt.currentTarget.classList.add('active');
+            }
         }
 
-        function copyTo(text) {
+        // Función para copiar al portapapeles
+        function copyTo(text, event) {
             navigator.clipboard.writeText(text).then(() => {
                 const btn = event.target;
                 const originalText = btn.innerText;
-                btn.innerText = "¡Listo!";
+                
+                // Feedback visual
+                btn.innerText = "¡Copiado!";
                 btn.style.background = "#007bff";
+                
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.style.background = "#28a745";
-                }, 1000);
+                }, 1200);
+            }).catch(err => {
+                alert('Error al copiar. Por favor, revisa los permisos del navegador.');
+                console.error('Error:', err);
             });
         }
     </script>
