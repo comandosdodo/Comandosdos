@@ -84,7 +84,7 @@
             <button class="copy-btn" onclick="copyTo('show version')">Copiar</button>
         </div>
         <div class="command-row">
-            <span class="command-text" data-tooltip="Verifica estado del puerto, si esta habilitado o no, velocidad y dúplex del puerto.">show interface -puerto-></span>
+            <span class="command-text" data-tooltip="Verifica estado del puerto, si esta habilitado o no, velocidad y dúplex del puerto.">show interface -puerto-</span>
             <button class="copy-btn" onclick="copyTo('show interface -puerto-')">Copiar</button>
         </div>
          <div class="command-row">
@@ -94,7 +94,15 @@
         <div class="command-row">
             <span class="command-text" data-tooltip="Muestra potencias del puerto">show  transceiver  ddm  -puerto-</span>
             <button class="copy-btn" onclick="copyTo('show  transceiver  ddm  -puerto-')">Copiar</button>
-    </div>
+        </div>
+          <div class="command-row">
+            <span class="command-text" data-tooltip="Muestra las ultimas caida del puerto que necesites">show  logging file | include -puerto-</span>
+            <button class="copy-btn" onclick="copyTo('show  logging file | include -puerto-')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <span class="command-text" data-tooltip="Muestra la hora del equipo, te ayuda a verificar logs">show  clock</span>
+            <button class="copy-btn" onclick="copyTo('show  clock')">Copiar</button>
+        </div>
 
     <!-- Sección HUAWEI -->
     <div id="huawei" class="command-section">
