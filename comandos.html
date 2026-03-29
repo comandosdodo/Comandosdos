@@ -18,6 +18,7 @@
             --soft-green: #e8f5e9;
             --text-main: #495057;
             --text-light: #868e96;
+            --text-variable: #dc3545; /* Rojo para partes variables */
         }
 
         body { 
@@ -113,7 +114,11 @@
             color: var(--primary-blue);
             font-weight: bold;
             margin-bottom: 5px;
+            white-space: pre-wrap; /* Mantiene saltos de línea si los hay */
         }
+        
+        /* Estilo para la 'X' variable */
+        .var-x { color: var(--text-variable); font-weight: bold; }
 
         .command-desc {
             font-size: 0.9rem;
@@ -138,6 +143,55 @@
             color: white; 
             transform: scale(1.05);
         }
+        
+        /* --- 5. Subsecciones y Saltos Rápidos (Huawei) --- */
+        .sub-header {
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border-blue);
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .jump-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .jump-btn {
+            flex: 1;
+            padding: 15px;
+            background: white;
+            color: var(--primary-blue);
+            border: 2px solid var(--border-blue);
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .jump-btn:hover {
+            background: var(--soft-blue);
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+        }
 
         /* Volver al inicio */
         .btn-back {
@@ -154,6 +208,7 @@
         @media (max-width: 600px) {
             .command-row { flex-direction: column; text-align: center; }
             .copy-btn { margin-left: 0; margin-top: 15px; width: 100%; }
+            .jump-nav { flex-direction: column; }
         }
     </style>
 </head>
@@ -187,63 +242,183 @@
             </div>
             <button class="copy-btn" onclick="copyTo('show version', event)">Copiar</button>
         </div>
-        <!-- SECCIÓN DE COMANDOS ACTUALIZADA -->
-       <div class="command-row">
+        <div class="command-row">
            <div class="command-info">
               <span class="command-text">show interface --puerto-- </span>
               <span class="command-desc">Negociación, duplex y estado puerto, si esta habilitado o no</span>
+           </div>
+           <button class="copy-btn" onclick="copyTo('show interface ', event)">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyTo('show interface ', event)">Copiar</button>
-       </div>
-
-       <div class="command-row">
+        <div class="command-row">
            <div class="command-info">
               <span class="command-text">show interface --puerto-- description </span>
               <span class="command-desc">Nombre del puerto</span>
+           </div>
+           <button class="copy-btn" onclick="copyTo('show interface --puerto-- description', event)">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyTo('show interface --puerto-- description', event)">Copiar</button>
-       </div>
-        
-     <div class="command-row">
+        <div class="command-row">
          <div class="command-info">
             <span class="command-text">show transceiver ddm --puerto--</span>
             <span class="command-desc">Muestra potencias ópticas del puerto</span>
-       </div>
-       <button class="copy-btn" onclick="copyTo('show transceiver ddm ', event)">Copiar</button>
-       </div>
-
-        <div class="command-row">
-    <div class="command-info">
-        <span class="command-text">show logging file | include --port--</span>
-        <span class="command-desc">Buscar caídas o logs específicos de un puerto</span>
-    </div>
-    <button class="copy-btn" onclick="copyTo('show logging file | include ', event)">Copiar</button>
-</div>
-
-<div class="command-row">
-    <div class="command-info">
-        <span class="command-text">show clock</span>
-        <span class="command-desc">Verificar hora actual del sistema</span>
-    </div>
-    <button class="copy-btn" onclick="copyTo('show clock', event)">Copiar</button>
-</div>
-
-<div class="command-row">
-    <div class="command-info">
-        <span class="command-text">show running-config interface --puerto--</span>
-        <span class="command-desc">Configuración actual: VLANs, MTU, modo</span>
-    </div>
-    <button class="copy-btn" onclick="copyTo('show running-config interface ', event)">Copiar</button>
-</div>
+         </div>
+         <button class="copy-btn" onclick="copyTo('show transceiver ddm ', event)">Copiar</button>
         </div>
-
-    <div id="huawei" class="command-section">
         <div class="command-row">
             <div class="command-info">
-                <span class="command-text">display ip routing-table</span>
-                <span class="command-desc">Tabla de enrutamiento IP completa</span>
+                <span class="command-text">show logging file | include --port--</span>
+                <span class="command-desc">Buscar caídas o logs específicos de un puerto</span>
             </div>
-            <button class="copy-btn" onclick="copyTo('display ip routing-table', event)">Copiar</button>
+            <button class="copy-btn" onclick="copyTo('show logging file | include ', event)">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show clock</span>
+                <span class="command-desc">Verificar hora actual del sistema</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show clock', event)">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show running-config interface --puerto--</span>
+                <span class="command-desc">Configuración actual: VLANs, MTU, modo</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show running-config interface ', event)">Copiar</button>
+        </div>
+    </div>
+
+    <div id="huawei" class="command-section">
+        
+        <div class="jump-nav">
+            <a href="#huawei-agg" class="jump-btn"><i class="fa-solid fa-network-wired"></i> Huawei AGG</a>
+            <a href="#huawei-edge" class="jump-btn"><i class="fa-solid fa-server"></i> Huawei EDGE</a>
+        </div>
+
+        <div id="huawei-agg">
+            <div class="sub-header"><i class="fa-solid fa-network-wired"></i> Huawei AGG</div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display current-configuration | section include <span class="var-x">X_ID</span></span>
+                    <span class="command-desc">Ver configuración filtrada por ID del servicio</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display current-configuration | section include ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display interface description</span>
+                    <span class="command-desc">Listar descripciones de todas las interfaces</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display interface description', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display current-configuration interface GigabitEthernet <span class="var-x">X/X/X</span></span>
+                    <span class="command-desc">Ver la configuración de una interfaz física específica</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display current-configuration interface GigabitEthernet ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display current-configuration interface GigabitEthernet <span class="var-x">X/X/X.subport</span></span>
+                    <span class="command-desc">Ver configuración de subinterfaz (donde está el Xconnect)</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display current-configuration interface GigabitEthernet ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display mpls l2vc <span class="var-x">X_VC_ID</span></span>
+                    <span class="command-desc">Ver detalles del Virtual Circuit (VC) del servicio MPLS</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display mpls l2vc ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">ping vc ethernet <span class="var-x">X_VC_ID</span> <span class="var-x">X_IP_DESTINO</span> -c 10 -s 1504 label-alert</span>
+                    <span class="command-desc">Realizar ping de extremo a extremo sobre el VC ethernet</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('ping vc ethernet  -c 10 -s 1504 label-alert', event)">Copiar</button>
+            </div>
+        </div>
+
+        <div id="huawei-edge">
+            <div class="sub-header"><i class="fa-solid fa-server"></i> Huawei EDGE</div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display current-configuration interface Virtual-Ethernet <span class="var-x">X/X/X.subport</span></span>
+                    <span class="command-desc">Ver configuración de una subinterfaz Virtual-Ethernet</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display current-configuration interface Virtual-Ethernet ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">telnet vrf <span class="var-x">X_VRF_NAME</span> <span class="var-x">X_IP_CLIENTE</span> source-interface <span class="var-x">X_BVI_IF</span> 443</span>
+                    <span class="command-desc">Prueba de Telnet a puerto 443 del cliente desde una VRF y origen específicos</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('telnet vrf   source-interface  443', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display interface description | include <span class="var-x">X_CLIENT_NAME</span></span>
+                    <span class="command-desc">Buscar interfaz por nombre o descripción del cliente</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display interface description | include ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display arp interface Virtual-Ethernet <span class="var-x">X/X/X.subport</span></span>
+                    <span class="command-desc">Mostrar tabla ARP del servicio en la interfaz</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display arp interface Virtual-Ethernet ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">ping -vpn-instance <span class="var-x">X_VRF_NAME</span> -brief -c 100 -m 10 -s 1400 -a <span class="var-x">X_IP_ORIGEN</span> <span class="var-x">X_IP_DESTINO</span></span>
+                    <span class="command-desc">Ping a IPs públicas desde la VRF, especificando origen y tamaño</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('ping -vpn-instance  -brief -c 100 -m 10 -s 1400 -a  ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">ping -vpn-instance <span class="var-x">X_VRF_NAME</span> -brief -c 100 -m 10 -s 1400 -a <span class="var-x">X_IP_ORIGEN</span> 8.8.8.8</span>
+                    <span class="command-desc">Ping desde la IP del Gateway (Firewall) a Google (8.8.8.8)</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('ping -vpn-instance  -brief -c 100 -m 10 -s 1400 -a  8.8.8.8', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display clock</span>
+                    <span class="command-desc">Verificar la hora actual del equipo</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display clock', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display bgp vpnv4 vpn-instance <span class="var-x">X_VRF_NAME</span> peer | include <span class="var-x">X_PEER_IP</span></span>
+                    <span class="command-desc">Ver estado del peer BGP en la VRF</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display bgp vpnv4 vpn-instance  peer | include ', event)">Copiar</button>
+            </div>
+            
+            <div class="command-row">
+                <div class="command-info">
+                    <span class="command-text">display bgp vpnv4 vpn-instance <span class="var-x">X_VRF_NAME</span> routing-table peer <span class="var-x">X_PEER_IP</span> received-routes</span>
+                    <span class="command-desc">Ver rutas recibidas del peer BGP</span>
+                </div>
+                <button class="copy-btn" onclick="copyTo('display bgp vpnv4 vpn-instance  routing-table peer  received-routes', event)">Copiar</button>
+            </div>
         </div>
     </div>
 
