@@ -1,133 +1,233 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Panel de Control Networking - Serena</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
+
         /* --- 1. Base y Fondo --- */
+
         body {
+
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
             background: #f8f9fa; /* Gris casi blanco sutil (Nube) */
+
             color: #495057;      /* Texto gris oscuro, no negro, para suavidad */
+
             height: 100vh;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             margin: 0;
+
             overflow: hidden; /* Evita scrolls extraños */
+
         }
+
         .container { 
+
             text-align: center; 
+
             padding: 40px; 
+
             background: rgba(255, 255, 255, 0.8); /* Fondo blanco traslúcido */
+
             border-radius: 20px;
+
             box-shadow: 0 10px 30px rgba(0, 123, 255, 0.05); /* Sombra azul ultra sutil */
+
         }
+
+
 
         /* --- 2. Título Principal --- */
+
         h1 { 
+
             margin-bottom: 50px; 
+
             color: #007bff; /* Azul Cielo Suave */
+
             text-transform: uppercase; 
+
             letter-spacing: 3px; 
+
             font-weight: 300; /* Letra más fina para elegancia */
+
             font-size: 2rem;
+
         }
+
         
+
         /* --- 3. Botones y Menú --- */
+
         .menu-buttons {
+
             display: flex;
+
             gap: 25px;
+
             justify-content: center;
+
         }
+
+
 
         .btn-menu {
+
             padding: 25px 40px;
+
             font-size: 1.1rem;
+
             font-weight: 600;
+
             color: #007bff; /* Texto Azul Cielo */
+
             background: #e3f2fd; /* Fondo Azul Pastel muy claro */
+
             border: 2px solid #b3e5fc; /* Borde azul muy tenue */
+
             border-radius: 12px;
+
             cursor: pointer;
+
             text-decoration: none;
+
             transition: all 0.4s ease; /* Transición más lenta para suavidad */
+
             width: 220px;
+
             display: flex;
+
             flex-direction: column; /* Icono arriba, texto abajo */
+
             align-items: center;
+
             justify-content: center;
+
             gap: 15px; /* Espacio entre icono y texto */
+
         }
+
+
 
         /* Iconos grandes y suaves */
+
         .btn-menu i {
+
             font-size: 2.5rem;
+
             opacity: 0.8;
+
         }
+
+
 
         /* Efectos Hover Suaves (Nube flotando) */
+
         .btn-menu:hover {
+
             background: #ffffff; /* Se vuelve blanco puro */
+
             border-color: #007bff; /* Borde azul cielo */
+
             box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15); /* Sombra suave flotante */
+
             transform: translateY(-8px); /* Sube suavemente */
+
         }
+
+
 
         /* El botón de config (para el futuro) lo mantenemos con verde sutil */
+
         .btn-config { 
+
             color: #28a745; 
+
             background: #e8f5e9; 
+
             border-color: #c8e6c9;
+
         }
+
         .btn-config:hover {
+
             border-color: #28a745;
+
             box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
+
         }
+
+
 
         /* --- 4. Mensaje de Ánimo (Footer) --- */
+
         .footer-mensaje {
+
             margin-top: 70px;
+
             font-style: italic;
+
             color: #868e96; /* Gris medio suave */
+
             font-size: 1.1rem;
+
             line-height: 1.8;
+
             border-top: 1px solid #e9ecef; /* Línea divisoria muy clarita */
+
             padding-top: 30px;
+
             max-width: 550px;
+
             margin-left: auto;
+
             margin-right: auto;
+
             font-weight: 300;
+
         }
+
         .corazon { 
+
             color: #007bff; /* Corazón azul, no rojo, para mantener la calma */
+
             opacity: 0.6;
+
         }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <div class="container">
+
         <h1><i class="fa-solid fa-cloud-sun"></i> QUÉ HAREMOS HOY...</h1>
+
         
+
         <div class="menu-buttons">
-             <a href="comandos.html" class="btn-menu btn-comandos">
-             <i class="fa-solid fa-terminal"></i> <span>COMANDOS DE EQUIPOS</span>
-            </a>
-            
-        </div>
 
-        <div class="footer-mensaje">
-            <p>
-                <i class="fa-solid fa-wind"></i> Epa, respira profundo. No te estreses que todo va a salir bien. <span class="corazon">❤</span><br> 
-                Un error no es el fin del mundo, tómate un café, la paz mental es lo primero.<br>
-                ¡Dale con calma, que tú eres un crack!<br>
-                <i class="fa-solid fa-coffee"></i>
-            </p>
-        </div>
-    </div>
+            <a href="comandos.html" class="btn-menu btn-comandos">
 
-</body>
-</html>
+                <i class="fa-solid fa-terminal"></i>
