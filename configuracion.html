@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Equipos - Serena</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reutilizamos tu estilo visual para que todo combine */
+        body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; color: #495057; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h1 { color: #28a745; text-align: center; text-transform: uppercase; font-weight: 300; }
+        .command-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; transition: 0.3s; }
+        .command-row:hover { background: #f1f8e9; }
+        .command-info { display: flex; flex-direction: column; }
+        .command-text { font-family: 'Courier New', monospace; font-weight: bold; color: #1b5e20; }
+        .command-desc { font-size: 0.9rem; color: #666; }
+        .copy-btn { background: #e8f5e9; border: 1px solid #c8e6c9; color: #28a745; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .copy-btn:hover { background: #28a745; color: white; }
+        .back-btn { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
+    <h1><i class="fa-solid fa-sliders"></i> Configuración RAX</h1>
+
+    <!-- Comandos extraídos de tu documento[cite: 1] -->
+    <div class="command-row">
+        <div class="command-info">
+            <span class="command-text">show vlan</span>
+            <span class="command-desc">Ver VLANs activas y puertos asignados[cite: 1]</span>
+        </div>
+        <button class="copy-btn" onclick="copyText('show vlan')">Copiar</button>
+    </div>
+
+    <div class="command-row">
+        <div class="command-info">
+            <span class="command-text">switchport qinq dot1q-tunnel</span>
+            <span class="command-desc">Habilitar túnel QinQ en puerto LAN[cite: 1]</span>
+        </div>
+        <button class="copy-btn" onclick="copyText('switchport qinq dot1q-tunnel')">Copiar</button>
+    </div>
+
+    <div class="command-row">
+        <div class="command-info">
+            <span class="command-text">ip address --IP-- 255.255.255.0 --VLAN--</span>
+            <span class="command-desc">Configurar IP de gestión en interface ip 0[cite: 1]</span>
+        </div>
+        <button class="copy-btn" onclick="copyText('ip address ')">Copiar</button>
+    </div>
+
+    <div class="command-row">
+        <div class="command-info">
+            <span class="command-text">bandwidth-profile --ID-- cir --Kbps-- cbs 1000</span>
+            <span class="command-desc">Crear perfil de ancho de banda (Megas x 1000)[cite: 1]</span>
+        </div>
+        <button class="copy-btn" onclick="copyText('bandwidth-profile ')">Copiar</button>
+    </div>
+
+    <div class="command-row">
+        <div class="command-info">
+            <span class="command-text">write</span>
+            <span class="command-desc">Guardar cambios (repetir 3 veces)[cite: 1]</span>
+        </div>
+        <button class="copy-btn" onclick="copyText('write')">Copiar</button>
+    </div>
+</div>
+
+<script>
+    function copyText(text) {
+        navigator.clipboard.writeText(text);
+        alert("Copiado: " + text);
+    }
+</script>
+
+</body>
+</html>
