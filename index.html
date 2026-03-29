@@ -9,101 +9,151 @@
         /* --- 1. Base y Fondo --- */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f8f9fa; /* Gris casi blanco sutil (Nube) */
-            color: #495057;      /* Texto gris oscuro, no negro, para suavidad */
-            height: 100vh;
+            background: #f8f9fa;
+            color: #495057;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
-            overflow: hidden; /* Evita scrolls extraños */
         }
         .container { 
             text-align: center; 
             padding: 40px; 
-            background: rgba(255, 255, 255, 0.8); /* Fondo blanco traslúcido */
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.05); /* Sombra azul ultra sutil */
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.05);
+            max-width: 600px;
         }
 
-        /* --- 2. Título Principal --- */
         h1 { 
             margin-bottom: 50px; 
-            color: #007bff; /* Azul Cielo Suave */
+            color: #007bff;
             text-transform: uppercase; 
             letter-spacing: 3px; 
-            font-weight: 300; /* Letra más fina para elegancia */
+            font-weight: 300;
             font-size: 2rem;
         }
         
         /* --- 3. Botones y Menú --- */
         .menu-buttons {
             display: flex;
+            flex-wrap: wrap; /* Permite que los botones bajen si no caben */
             gap: 25px;
             justify-content: center;
         }
 
         .btn-menu {
-            padding: 25px 40px;
-            font-size: 1.1rem;
+            padding: 25px 20px;
+            font-size: 1rem;
             font-weight: 600;
-            color: #007bff; /* Texto Azul Cielo */
-            background: #e3f2fd; /* Fondo Azul Pastel muy claro */
-            border: 2px solid #b3e5fc; /* Borde azul muy tenue */
+            color: #007bff;
+            background: #e3f2fd;
+            border: 2px solid #b3e5fc;
             border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.4s ease; /* Transición más lenta para suavidad */
+            transition: all 0.4s ease;
             width: 220px;
             display: flex;
-            flex-direction: column; /* Icono arriba, texto abajo */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px; /* Espacio entre icono y texto */
+            gap: 15px;
         }
 
-        /* Iconos grandes y suaves */
-        .btn-menu i {
-            font-size: 2.5rem;
-            opacity: 0.8;
+        /* Estilo especial para el tercer botón (centrado abajo) */
+        .btn-interes {
+            width: 250px;
+            margin-top: 10px;
+            color: #6f42c1; /* Color púrpura suave */
+            background: #f3e5f5;
+            border-color: #e1bee7;
         }
 
-        /* Efectos Hover Suaves (Nube flotando) */
+        .btn-menu i { font-size: 2.5rem; opacity: 0.8; }
+
         .btn-menu:hover {
-            background: #ffffff; /* Se vuelve blanco puro */
-            border-color: #007bff; /* Borde azul cielo */
-            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15); /* Sombra suave flotante */
-            transform: translateY(-8px); /* Sube suavemente */
+            background: #ffffff;
+            border-color: #007bff;
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+            transform: translateY(-8px);
         }
 
-        /* El botón de config (para el futuro) lo mantenemos con verde sutil */
-        .btn-config { 
-            color: #28a745; 
-            background: #e8f5e9; 
-            border-color: #c8e6c9;
-        }
-        .btn-config:hover {
-            border-color: #28a745;
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
+        .btn-config { color: #28a745; background: #e8f5e9; border-color: #c8e6c9; }
+        .btn-config:hover { border-color: #28a745; box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15); }
+        
+        .btn-interes:hover { border-color: #6f42c1; box-shadow: 0 8px 25px rgba(111, 66, 193, 0.15); }
+
+        /* --- 4. Ventana Modal (Links de Interés) --- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
         }
 
-        /* --- 4. Mensaje de Ánimo (Footer) --- */
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 400px;
+            text-align: left;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .close-modal { font-size: 28px; cursor: pointer; color: #aaa; }
+        .close-modal:hover { color: #000; }
+
+        .links-list { list-style: none; padding: 0; }
+        .links-list li { margin-bottom: 15px; }
+        .links-list a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #495057;
+            font-weight: 500;
+            padding: 12px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: 0.3s;
+        }
+        .links-list a:hover {
+            background: #e3f2fd;
+            color: #007bff;
+            transform: translateX(10px);
+        }
+
+        /* --- 5. Footer --- */
         .footer-mensaje {
-            margin-top: 70px;
+            margin-top: 50px;
             font-style: italic;
-            color: #868e96; /* Gris medio suave */
-            font-size: 1.1rem;
-            line-height: 1.8;
-            border-top: 1px solid #e9ecef; /* Línea divisoria muy clarita */
-            padding-top: 30px;
-            max-width: 550px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 300;
-        }
-        .corazon { 
-            color: #007bff; /* Corazón azul, no rojo, para mantener la calma */
-            opacity: 0.6;
+            color: #868e96;
+            font-size: 1rem;
+            line-height: 1.6;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
         }
     </style>
 </head>
@@ -113,24 +163,59 @@
         <h1><i class="fa-solid fa-cloud-sun"></i> QUÉ HAREMOS HOY...</h1>
         
         <div class="menu-buttons">
-            <a href="comandos.html" class="btn-menu btn-comandos">
+            <a href="comandos.html" class="btn-menu">
                 <i class="fa-solid fa-terminal"></i> <span>COMANDOS DE EQUIPOS</span>
             </a>
             
             <a href="configuracion.html" class="btn-menu btn-config">
                 <i class="fa-solid fa-sliders"></i> <span>CONFIGURACIÓN DE EQUIPOS</span>
             </a>
+
+            <button class="btn-menu btn-interes" onclick="openModal()">
+                <i class="fa-solid fa-star"></i> <span>PÁGINAS DE INTERÉS</span>
+            </button>
         </div>
 
         <div class="footer-mensaje">
             <p>
-                <i class="fa-solid fa-wind"></i> Epa, respira profundo. No te estreses que todo va a salir bien. <span class="corazon">❤</span><br> 
-                Un error no es el fin del mundo, tómate un café, la paz mental es lo primero.<br>
-                ¡Dale con calma, que tú eres un crack!<br>
-                <i class="fa-solid fa-coffee"></i>
+                <i class="fa-solid fa-wind"></i> Epa, respira profundo. No te estreses. <br> 
+                ¡Dale con calma, que tú eres un crack! <i class="fa-solid fa-coffee"></i>
             </p>
         </div>
     </div>
+
+    <div id="linksModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="margin:0; color:#6f42c1; font-size: 1.2rem;">Páginas de Interés</h2>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <ul class="links-list">
+                <li><a href="https://www.deepl.com/es/translator" target="_blank"><i class="fa-solid fa-language"></i> Traductor DeepL</a></li>
+                <li><a href="https://macvendors.com/" target="_blank"><i class="fa-solid fa-search"></i> Ver MAC Vendor</a></li>
+                <li><a href="https://mxtoolbox.com/blacklists.aspx" target="_blank"><i class="fa-solid fa-user-slash"></i> Lista Negra (Blacklist)</a></li>
+                <li><a href="https://n1ufiherramientas.github.io/ufiherramientas/" target="_blank"><i class="fa-solid fa-table"></i> Tablas y Scripts</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById("linksModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("linksModal").style.display = "none";
+        }
+
+        // Cerrar si hace clic fuera de la cajita blanca
+        window.onclick = function(event) {
+            let modal = document.getElementById("linksModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
