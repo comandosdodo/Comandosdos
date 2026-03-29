@@ -190,16 +190,24 @@
         <!-- SECCIÓN DE COMANDOS ACTUALIZADA -->
        <div class="command-row">
            <div class="command-info">
-              <span class="command-text">show interface --puerto-- description</span>
-              <span class="command-desc">Negociación, duplex y estado administrativo</span>
+              <span class="command-text">show interface --puerto-- </span>
+              <span class="command-desc">Negociación, duplex y estado puerto, si esta habilitado o no</span>
+        </div>
+        <button class="copy-btn" onclick="copyTo('show interface ', event)">Copiar</button>
+       </div>
+
+       <div class="command-row">
+           <div class="command-info">
+              <span class="command-text">show interface --puerto-- description </span>
+              <span class="command-desc">Nombre del puerto</span>
         </div>
         <button class="copy-btn" onclick="copyTo('show interface --puerto-- description', event)">Copiar</button>
        </div>
-
+        
      <div class="command-row">
          <div class="command-info">
             <span class="command-text">show transceiver ddm --puerto--</span>
-            <span class="command-desc">Lectura de potencias ópticas (DDM)</span>
+            <span class="command-desc">Muestra potencias ópticas del puerto</span>
        </div>
        <button class="copy-btn" onclick="copyTo('show transceiver ddm ', event)">Copiar</button>
        </div>
