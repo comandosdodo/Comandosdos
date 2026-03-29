@@ -187,6 +187,46 @@
             </div>
             <button class="copy-btn" onclick="copyTo('show version', event)">Copiar</button>
         </div>
+        <!-- SECCIÓN DE COMANDOS ACTUALIZADA -->
+       <div class="command-row">
+           <div class="command-info">
+              <span class="command-text">show interface --puerto-- description</span>
+              <span class="command-desc">Negociación, duplex y estado administrativo</span>
+        </div>
+        <button class="copy-btn" onclick="copyTo('show interface --puerto-- description', event)">Copiar</button>
+       </div>
+
+     <div class="command-row">
+         <div class="command-info">
+            <span class="command-text">show transceiver ddm --puerto--</span>
+            <span class="command-desc">Lectura de potencias ópticas (DDM)</span>
+       </div>
+       <button class="copy-btn" onclick="copyTo('show transceiver ddm ', event)">Copiar</button>
+       </div>
+
+        <div class="command-row">
+    <div class="command-info">
+        <span class="command-text">show logging file | include --port--</span>
+        <span class="command-desc">Buscar caídas o logs específicos de un puerto</span>
+    </div>
+    <button class="copy-btn" onclick="copyTo('show logging file | include ', event)">Copiar</button>
+</div>
+
+<div class="command-row">
+    <div class="command-info">
+        <span class="command-text">show clock</span>
+        <span class="command-desc">Verificar hora actual del sistema</span>
+    </div>
+    <button class="copy-btn" onclick="copyTo('show clock', event)">Copiar</button>
+</div>
+
+<div class="command-row">
+    <div class="command-info">
+        <span class="command-text">show running-config interface --puerto--</span>
+        <span class="command-desc">Configuración actual: VLANs, MTU, modo</span>
+    </div>
+    <button class="copy-btn" onclick="copyTo('show running-config interface ', event)">Copiar</button>
+</div>
         </div>
 
     <div id="huawei" class="command-section">
