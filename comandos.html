@@ -3,281 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comandos de Red - Serena</title>
+    <title>Comandos de Red - Serena Enterprise</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/606/606200.png">
-    
     <style>
-        /* --- 1. Base Estilo Serena --- */
         :root {
-            --bg-page: #f8f9fa;
-            --primary-blue: #007bff;
-            --soft-blue: #e3f2fd;
-            --border-blue: #b3e5fc;
+            --bg-page: #f0f2f5;
+            --primary-blue: #0056b3;
+            --accent-blue: #007bff;
+            --soft-blue: #eef6ff;
+            --border-blue: #cce5ff;
             --success-green: #28a745;
-            --soft-green: #e8f5e9;
-            --text-main: #495057;
-            --text-light: #868e96;
-            --text-variable: #dc3545; 
+            --soft-green: #e2fbd7;
+            --text-main: #333;
+            --text-light: #666;
+            --text-variable: #d93025;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            font-family: 'Segoe UI', Arial, sans-serif; 
             background: var(--bg-page); 
             color: var(--text-main); 
-            padding: 40px 20px; 
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        .header { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            max-width: 900px;
-        }
-
-        h1 { 
-            color: var(--primary-blue);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
-
-        .subtitle { color: var(--text-light); font-style: italic; }
-
-        /* --- 2. Pestañas (Tabs) --- */
+        .header { text-align: center; margin-bottom: 30px; width: 100%; max-width: 1000px; }
+        .header h1 { color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 5px; }
+        
+        /* --- Navegación --- */
         .nav-tabs { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 12px; 
-            justify-content: center; 
-            margin-bottom: 40px; 
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; 
+            margin-bottom: 30px; position: sticky; top: 10px; z-index: 1000;
+            background: rgba(240, 242, 245, 0.9); backdrop-filter: blur(10px);
+            padding: 15px; border-radius: 15px; width: 100%; max-width: 950px;
         }
-
         .tab-btn { 
-            padding: 12px 25px; 
-            cursor: pointer; 
-            background: white; 
-            color: var(--primary-blue); 
-            border: 2px solid var(--border-blue); 
-            border-radius: 10px; 
-            font-weight: 600; 
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-size: 0.9rem;
+            padding: 12px 24px; cursor: pointer; background: white; color: var(--accent-blue); 
+            border: 2px solid var(--border-blue); border-radius: 12px; font-weight: bold; 
+            transition: all 0.3s ease; text-transform: uppercase; font-size: 0.9rem;
+            box-shadow: var(--shadow);
+        }
+        .tab-btn:hover { transform: translateY(-2px); background: var(--soft-blue); }
+        .tab-btn.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+
+        /* --- Secciones --- */
+        .command-section { display: none; width: 100%; max-width: 900px; padding-bottom: 50px; }
+        .active-section { display: block; animation: slideUp 0.4s ease-out; }
+
+        .sub-header {
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            color: white; padding: 12px 20px; border-radius: 10px;
+            margin: 35px 0 15px 0; font-size: 1.1rem; font-weight: 600;
+            display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow);
         }
 
-        .tab-btn:hover { 
-            background: var(--soft-blue);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+        .jump-menu {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px; margin-bottom: 20px;
         }
-
-        .tab-btn.active { 
-            background: var(--primary-blue); 
-            color: white; 
-            border-color: var(--primary-blue);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+        .jump-link {
+            background: white; padding: 10px; text-align: center; border-radius: 8px;
+            text-decoration: none; color: var(--accent-blue); font-weight: 600;
+            font-size: 0.85rem; border: 1px solid var(--border-blue); transition: 0.2s;
         }
-
-        /* --- 3. Tarjetas de Comandos --- */
-        .command-section { display: none; width: 100%; max-width: 800px; }
-        .active-section { display: block; animation: fadeIn 0.5s ease; }
+        .jump-link:hover { background: var(--accent-blue); color: white; }
 
         .command-row { 
-            display: flex; 
-            align-items: center; 
-            background: white; 
-            margin-bottom: 15px; 
-            padding: 20px; 
-            border-radius: 15px;
-            border: 1px solid #eee;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
+            display: flex; align-items: center; background: white; margin-bottom: 12px; 
+            padding: 18px; border-radius: 12px; border: 1px solid #dee2e6;
+            transition: 0.3s;
         }
-
-        .command-row:hover { 
-            transform: translateX(10px); 
-            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.1);
-            border-color: var(--border-blue);
-        }
-
-        .command-info { flex-grow: 1; }
-
+        .command-row:hover { border-color: var(--accent-blue); transform: scale(1.01); }
+        .command-info { flex-grow: 1; overflow: hidden; }
         .command-text { 
-            display: block;
-            font-family: 'Consolas', monospace; 
-            font-size: 1.1rem;
-            color: var(--primary-blue);
-            font-weight: bold;
-            margin-bottom: 5px;
-            white-space: pre-wrap;
+            display: block; font-family: 'Consolas', 'Courier New', monospace; 
+            font-size: 1.05rem; color: #1a1a1a; font-weight: 700; 
+            margin-bottom: 6px; word-break: break-all;
         }
-        
-        .var-x { color: var(--text-variable); font-weight: bold; }
-
-        .command-desc {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
+        .var-x { color: var(--text-variable); background: #fff5f5; padding: 2px 4px; border-radius: 4px; }
+        .command-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.4; }
 
         .copy-btn { 
-            margin-left: 20px; 
-            cursor: pointer; 
-            padding: 10px 20px; 
-            background: var(--soft-green); 
-            border: 2px solid #c8e6c9; 
-            color: var(--success-green); 
-            border-radius: 8px; 
-            font-weight: bold;
-            transition: all 0.3s;
+            margin-left: 20px; cursor: pointer; padding: 10px 18px; background: var(--soft-green); 
+            border: 1px solid #c3e6cb; color: var(--success-green); border-radius: 8px; 
+            font-weight: bold; transition: all 0.2s; min-width: 85px;
         }
+        .copy-btn:active { transform: scale(0.95); }
 
-        .copy-btn:hover { 
-            background: var(--success-green); 
-            color: white; 
-            transform: scale(1.05);
-        }
-        
-        /* --- 4. Subsecciones --- */
-        .sub-header {
-            color: var(--text-main);
-            border-bottom: 2px solid var(--border-blue);
-            padding-bottom: 10px;
-            margin-top: 50px;
-            margin-bottom: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .jump-nav {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            position: sticky;
-            top: 10px;
-            z-index: 10;
-        }
-        
-        .jump-btn {
-            flex: 1;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(5px);
-            color: var(--primary-blue);
-            border: 1px solid var(--border-blue);
-            border-radius: 8px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .jump-btn:hover {
-            background: var(--primary-blue);
-            color: white;
-        }
-
-        .btn-back {
-            margin-top: 30px;
-            text-decoration: none;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 600px) {
             .command-row { flex-direction: column; text-align: center; }
             .copy-btn { margin-left: 0; margin-top: 15px; width: 100%; }
-            .jump-nav { flex-wrap: wrap; }
-            .jump-btn { flex: 1 1 45%; }
+            .nav-tabs { padding: 5px; }
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1><i class="fa-solid fa-terminal"></i> Mis Comandos</h1>
-        <p class="subtitle">Selecciona el vendor y copia el comando para tu terminal</p>
+        <h1><i class="fa-solid fa-server"></i> Serena Command Center</h1>
+        <p>Base de datos completa de comandos para Ingeniería de Redes</p>
     </div>
 
-    <div class="nav-tabs">
-        <button class="tab-btn active" onclick="showTab(event, 'rax')">RAX</button>
-        <button class="tab-btn" onclick="showTab(event, 'rad')">RAD</button>
-        <button class="tab-btn" onclick="showTab(event, 'huawei')">HUAWEI</button>
-        <button class="tab-btn" onclick="showTab(event, 'ciena')">CIENA</button>
-        <button class="tab-btn" onclick="showTab(event, 'asr')">ASR</button>
+    <div class="nav-tabs" id="mainNav">
+        <button class="tab-btn active" onclick="showSection('rax', this)">RAX (Raisecom)</button>
+        <button class="tab-btn" onclick="showSection('rad', this)">RAD</button>
+        <button class="tab-btn" onclick="showSection('huawei', this)">HUAWEI</button>
+        <button class="tab-btn" onclick="showSection('ciena', this)">CIENA</button>
+        <button class="tab-btn" onclick="showSection('asr', this)">CISCO ASR</button>
     </div>
 
     <!-- SECCIÓN RAX -->
     <div id="rax" class="command-section active-section">
-        <div class="command-row"><div class="command-info"><span class="command-text">show interface</span><span class="command-desc">Estado general de interfaces (NNI/UNI)</span></div><button class="copy-btn" onclick="copyTo('show interface', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show version</span><span class="command-desc">Serial, MAC, Uptime y Modelo</span></div><button class="copy-btn" onclick="copyTo('show version', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show interface <span class="var-x">--puerto--</span> </span><span class="command-desc">Negociación, duplex y estado puerto</span></div><button class="copy-btn" onclick="copyTo('show interface ', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show interface <span class="var-x">--puerto--</span> description </span><span class="command-desc">Nombre del puerto</span></div><button class="copy-btn" onclick="copyTo('show interface --puerto-- description', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show transceiver ddm <span class="var-x">--puerto--</span></span><span class="command-desc">Muestra potencias ópticas del puerto</span></div><button class="copy-btn" onclick="copyTo('show transceiver ddm ', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show logging file | include <span class="var-x">--port--</span></span><span class="command-desc">Buscar caídas o logs específicos</span></div><button class="copy-btn" onclick="copyTo('show logging file | include ', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show clock</span><span class="command-desc">Verificar hora actual del sistema</span></div><button class="copy-btn" onclick="copyTo('show clock', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show running-config interface <span class="var-x">--puerto--</span></span><span class="command-desc">Configuración actual: VLANs, MTU, modo</span></div><button class="copy-btn" onclick="copyTo('show running-config interface ', event)">Copiar</button></div>
+        <div class="sub-header"><i class="fa-solid fa-Microchip"></i> Raisecom RAX - Diagnóstico</div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show interface</span><span class="command-desc">Resumen de todas las interfaces (Admin/Oper Status)</span></div><button class="copy-btn" onclick="copyC('show interface')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show interface <span class="var-x">port</span> description</span><span class="command-desc">Ver el nombre/etiqueta del puerto</span></div><button class="copy-btn" onclick="copyC('show interface description')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show transceiver ddm <span class="var-x">port</span></span><span class="command-desc">Lectura de potencia óptica (Tx/Rx Power)</span></div><button class="copy-btn" onclick="copyC('show transceiver ddm ')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show mac-address-table l2cp</span><span class="command-desc">Tabla de MACs de control</span></div><button class="copy-btn" onclick="copyC('show mac-address-table l2cp')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show logging file | include <span class="var-x">keyword</span></span><span class="command-desc">Filtro de logs en memoria</span></div><button class="copy-btn" onclick="copyC('show logging file | include ')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show run interface <span class="var-x">port</span></span><span class="command-desc">Configuración específica de una interfaz</span></div><button class="copy-btn" onclick="copyC('show running-config interface ')">Copiar</button></div>
     </div>
 
     <!-- SECCIÓN RAD -->
     <div id="rad" class="command-section">
-        <div class="command-row"><div class="command-info"><span class="command-text">show configure system device-information</span><span class="command-desc">Información general del equipo</span></div><button class="copy-btn" onclick="copyTo('show configure system device-information', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show configure system system-date</span><span class="command-desc">Fecha y hora configuradas</span></div><button class="copy-btn" onclick="copyTo('show configure system system-date', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show configure port summary</span><span class="command-desc">Resumen del estado de todos los puertos</span></div><button class="copy-btn" onclick="copyTo('show configure port summary', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show configure port ethernet <span class="var-x"><puerto></span> status</span><span class="command-desc">Estado detallado (link, velocidad, duplex)</span></div><button class="copy-btn" onclick="copyTo('show configure port ethernet status', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">show configure port ethernet <span class="var-x"><puerto></span> statistics</span><span class="command-desc">Contadores de tráfico y errores</span></div><button class="copy-btn" onclick="copyTo('show configure port ethernet statistics', event)">Copiar</button></div>
+        <div class="sub-header">RAD ETX Series</div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure port summary</span><span class="command-desc">Estado rápido de link en puertos físicos</span></div><button class="copy-btn" onclick="copyC('show configure port summary')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure port ethernet <span class="var-x">ID</span> status</span><span class="command-desc">Detalle de autonegociación y duplex</span></div><button class="copy-btn" onclick="copyC('show configure port ethernet status')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure flow status</span><span class="command-desc">Verificar si los flujos de tráfico están UP</span></div><button class="copy-btn" onclick="copyC('show configure flow status')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure analyzer statistics port ethernet <span class="var-x">ID</span></span><span class="command-desc">Contadores de errores (CRC, Collisions)</span></div><button class="copy-btn" onclick="copyC('show configure analyzer statistics port ethernet')">Copiar</button></div>
     </div>
 
-    <!-- SECCIÓN HUAWEI COMPLETA -->
+    <!-- SECCIÓN HUAWEI (LA MÁS LARGA) -->
     <div id="huawei" class="command-section">
-        <div class="jump-nav">
-            <a href="#huawei-agg" class="jump-btn"><i class="fa-solid fa-network-wired"></i> AGG</a>
-            <a href="#huawei-edge" class="jump-btn"><i class="fa-solid fa-server"></i> EDGE</a>
-            <a href="#huawei-last-mile" class="jump-btn"><i class="fa-solid fa-house-signal"></i> Última Milla</a>
+        <div class="jump-menu">
+            <a href="#h-agg" class="jump-link">AGG (Agregación)</a>
+            <a href="#h-edge" class="jump-link">EDGE (Core/VPRN)</a>
+            <a href="#h-um" class="jump-link">Última Milla</a>
         </div>
 
-        <div id="huawei-agg">
-            <div class="sub-header"><i class="fa-solid fa-network-wired"></i> Huawei AGG</div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration | section include <span class="var-x">X_ID</span></span><span class="command-desc">Ver configuración filtrada por ID</span></div><button class="copy-btn" onclick="copyTo('display current-configuration | section include ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display interface description</span><span class="command-desc">Listar descripciones de interfaces</span></div><button class="copy-btn" onclick="copyTo('display interface description', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration interface GigabitEthernet <span class="var-x">X/X/X</span></span><span class="command-desc">Configuración interfaz física</span></div><button class="copy-btn" onclick="copyTo('display current-configuration interface GigabitEthernet ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration interface GigabitEthernet <span class="var-x">X/X/X.sub</span></span><span class="command-desc">Configuración subinterfaz (Xconnect)</span></div><button class="copy-btn" onclick="copyTo('display current-configuration interface GigabitEthernet ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display mpls l2vc <span class="var-x">X_VC_ID</span></span><span class="command-desc">Detalles del Virtual Circuit (VC)</span></div><button class="copy-btn" onclick="copyTo('display mpls l2vc ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">ping vc ethernet <span class="var-x">ID</span> <span class="var-x">DEST</span> -c 10 -s 1504 label-alert</span><span class="command-desc">Ping E2E sobre VC ethernet</span></div><button class="copy-btn" onclick="copyTo('ping vc ethernet -c 10 -s 1504 label-alert', event)">Copiar</button></div>
-        </div>
-
-        <div id="huawei-edge">
-            <div class="sub-header"><i class="fa-solid fa-server"></i> Huawei EDGE</div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration interface Virtual-Ethernet <span class="var-x">X/X/X.sub</span></span><span class="command-desc">Configuración subinterfaz Virtual-Ethernet</span></div><button class="copy-btn" onclick="copyTo('display current-configuration interface Virtual-Ethernet ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">telnet vrf <span class="var-x">VRF</span> <span class="var-x">IP</span> source-interface <span class="var-x">BVI</span> 443</span><span class="command-desc">Prueba Telnet puerto 443 desde VRF</span></div><button class="copy-btn" onclick="copyTo('telnet vrf source-interface 443', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display interface description | include <span class="var-x">CLIENTE</span></span><span class="command-desc">Buscar interfaz por nombre de cliente</span></div><button class="copy-btn" onclick="copyTo('display interface description | include ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display arp interface Virtual-Ethernet <span class="var-x">X/X/X.sub</span></span><span class="command-desc">Mostrar tabla ARP del servicio</span></div><button class="copy-btn" onclick="copyTo('display arp interface Virtual-Ethernet ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">ping -vpn-instance <span class="var-x">VRF</span> -brief -c 100 -m 10 -s 1400 -a <span class="var-x">ORIG</span> <span class="var-x">DEST</span></span><span class="command-desc">Ping desde VRF con origen y tamaño específico</span></div><button class="copy-btn" onclick="copyTo('ping -vpn-instance -brief -c 100 -m 10 -s 1400 -a ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display bgp vpnv4 vpn-instance <span class="var-x">VRF</span> peer</span><span class="command-desc">Estado del peer BGP en la VRF</span></div><button class="copy-btn" onclick="copyTo('display bgp vpnv4 vpn-instance peer | include ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display bgp vpnv4 vpn-instance <span class="var-x">VRF</span> routing-table peer <span class="var-x">IP</span> received-routes</span><span class="command-desc">Rutas recibidas BGP</span></div><button class="copy-btn" onclick="copyTo('display bgp vpnv4 vpn-instance routing-table peer received-routes', event)">Copiar</button></div>
-        </div>
-
-        <div id="huawei-last-mile">
-            <div class="sub-header"><i class="fa-solid fa-house-signal"></i> Huawei Última Milla (S5735)</div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display version</span><span class="command-desc">Versión, modelo y uptime (tiempo encendido)</span></div><button class="copy-btn" onclick="copyTo('display version', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display vlan</span><span class="command-desc">Listar VLANs y sus puertos (Tagged/Untagged)</span></div><button class="copy-btn" onclick="copyTo('display vlan', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display mac-address vlan <span class="var-x">ID</span></span><span class="command-desc">MACs aprendidas en la VLAN del cliente</span></div><button class="copy-btn" onclick="copyTo('display mac-address vlan ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display interface <span class="var-x">PUERTO</span></span><span class="command-desc">Estado físico, errores y utilización de ancho de banda</span></div><button class="copy-btn" onclick="copyTo('display interface ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display transceiver diagnosis interface <span class="var-x">PUERTO</span>
+        <div id="h-agg" class="sub-header">Huawei Agregación (AGG)</div>
+        <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration | section include <span class="var-x">CLIENTE_ID</span></span><span class="command-desc">Configuración completa filtrada</span></div><button class="copy-btn" onclick="copyC('display current-configuration | section include ')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">display mpls l2vc <span class="var-x">VC_ID</span></span><span class="command-desc">Estado del túnel L2VPN</span></div><button class="copy-btn" onclick="copyC('display mpls l2vc ')">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">display mpls l2vc brief</span><span class="command-desc">Resumen de todos los xconnects</span></div><button class="copy-btn" onclick="copyC('display mpls l2vc brief')">Copiar</button></div>
+        <div class="command-row"><div class
