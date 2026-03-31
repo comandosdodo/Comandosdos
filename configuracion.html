@@ -3,125 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuración de Equipos RAX - Serena</title>
+    <title>Configuración Individual RAX - Serena</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; color: #495057; padding: 20px; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .container { max-width: 850px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         h1 { color: #28a745; text-align: center; text-transform: uppercase; font-weight: 300; margin-bottom: 30px; }
-        h2 { color: #1b5e20; border-left: 5px solid #28a745; padding-left: 10px; font-size: 1.2rem; margin-top: 30px; background: #f1f8e9; padding: 10px; border-radius: 0 10px 10px 0; }
-        .command-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border-bottom: 1px solid #eee; transition: 0.3s; }
-        .command-row:hover { background: #f9fdf9; }
-        .command-info { display: flex; flex-direction: column; flex: 1; }
-        .command-text { font-family: 'Courier New', monospace; font-weight: bold; color: #1b5e20; word-break: break-all; }
-        .command-desc { font-size: 0.85rem; color: #666; margin-top: 4px; }
-        .copy-btn { background: #e8f5e9; border: 1px solid #c8e6c9; color: #28a745; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-left: 15px; min-width: 80px; }
+        h2 { color: #1b5e20; border-left: 5px solid #28a745; padding: 10px; font-size: 1.1rem; margin-top: 25px; background: #f1f8e9; border-radius: 0 10px 10px 0; }
+        .command-group { margin-bottom: 20px; border: 1px solid #eee; border-radius: 10px; overflow: hidden; }
+        .command-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; border-bottom: 1px solid #f1f1f1; background: #fff; transition: 0.2s; }
+        .command-row:last-child { border-bottom: none; }
+        .command-row:hover { background: #fdfdfd; }
+        .command-text { font-family: 'Courier New', monospace; font-weight: bold; color: #1b5e20; font-size: 0.95rem; }
+        .command-desc { font-size: 0.8rem; color: #888; margin-left: 10px; font-style: italic; }
+        .copy-btn { background: white; border: 1px solid #28a745; color: #28a745; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: bold; transition: 0.3s; }
         .copy-btn:hover { background: #28a745; color: white; }
         .back-btn { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #888; font-size: 0.9rem; }
-        .warning-box { background: #fff3e0; border-left: 5px solid #ff9800; padding: 15px; margin-top: 20px; border-radius: 10px; font-size: 0.9rem; }
+        .tag { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; text-transform: uppercase; margin-right: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
-    <h1><i class="fa-solid fa-microchip"></i> Configuración Integral RAX</h1>
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+    <h1><i class="fa-solid fa-terminal"></i> Comandos Individuales RAX</h1>
 
-    <div class="warning-box">
-        <strong>Nota:</strong> Los valores entre <code>--TEXTO--</code> deben ser reemplazados por los datos reales del servicio.
-    </div>
-
-    <!-- SECCIÓN 1: LIMPIEZA -->
-    <h2>1. Limpieza de Configuración (Modo Enable)</h2>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">show vlan</span>
-            <span class="command-desc">Verificar VLANs actuales en el equipo.</span>
+    <!-- 1. MODO CONFIG -->
+    <h2><i class="fa-solid fa-gears"></i> 1. Acceso y Limpieza</h2>
+    <div class="command-group">
+        <div class="command-row">
+            <div><span class="tag">Global</span><span class="command-text">conf t</span></div>
+            <button class="copy-btn" onclick="copyLine('conf t')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('show vlan')">Copiar</button>
-    </div>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">no vlan --ID--</span>
-            <span class="command-desc">Eliminar una VLAN específica (dentro de conf t).</span>
+        <div class="command-row">
+            <div><span class="tag">VLAN</span><span class="command-text">no vlan --ID--</span><span class="command-desc">(Borrar VLAN antigua)</span></div>
+            <button class="copy-btn" onclick="copyLine('no vlan ')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('no vlan ')">Copiar</button>
+        <div class="command-row">
+            <div><span class="tag">Port</span><span class="command-text">no switchport mode</span><span class="command-desc">(Limpieza obligatoria)</span></div>
+            <button class="copy-btn" onclick="copyLine('no switchport mode')">Copiar</button>
+        </div>
     </div>
 
-    <!-- SECCIÓN 2: CORE CONFIG -->
-    <h2>2. VLANs, NNI y UNI (Entrar a conf t)</h2>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">vlan --ID-- / state active / name --NOMBRE--</span>
-            <span class="command-desc">Crear y activar VLAN de Gestión o Servicio.</span>
+    <!-- 2. VLANs -->
+    <h2><i class="fa-solid fa-network-wired"></i> 2. Creación de VLANs</h2>
+    <div class="command-group">
+        <div class="command-row">
+            <div><span class="command-text">vlan --ID--</span></div>
+            <button class="copy-btn" onclick="copyLine('vlan ')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('vlan --ID--\n state active\n name --NOMBRE--')">Copiar</button>
-    </div>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">interface nni --PORT-- / switchport mode trunk</span>
-            <span class="command-desc">Configurar puerto hacia la red (Uplink).</span>
+        <div class="command-row">
+            <div><span class="command-text">state active</span></div>
+            <button class="copy-btn" onclick="copyLine('state active')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('interface nni --PORT--\n switchport mode trunk\n switchport trunk allowed vlan --ID--\n no shutdown')">Copiar</button>
-    </div>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">interface uni --PORT-- / switchport mode access</span>
-            <span class="command-desc">Configurar puerto hacia el cliente.</span>
+        <div class="command-row">
+            <div><span class="command-text">name --NOMBRE--</span></div>
+            <button class="copy-btn" onclick="copyLine('name ')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('interface uni --PORT--\n switchport mode access\n switchport access vlan --ID--\n no shutdown')">Copiar</button>
     </div>
 
-    <!-- SECCIÓN 3: GESTIÓN E IP -->
-    <h2>3. IP de Gestión y Rutas</h2>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">interface ip 0 / ip address --IP-- 255.255.255.0 --VLAN--</span>
-            <span class="command-desc">Asignar IP de administración a la VLAN de gestión.</span>
+    <!-- 3. PUERTOS -->
+    <h2><i class="fa-solid fa-plug"></i> 3. Configuración de Interfaces</h2>
+    <div class="command-group">
+        <div class="command-row">
+            <div><span class="tag">NNI</span><span class="command-text">switchport mode trunk</span></div>
+            <button class="copy-btn" onclick="copyLine('switchport mode trunk')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('interface ip 0\n ip address --IP-- 255.255.255.0 --VLAN--')">Copiar</button>
-    </div>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">ip default-gateway --GW--</span>
-            <span class="command-desc">Ruta de salida para modelos RAX711.</span>
+        <div class="command-row">
+            <div><span class="tag">NNI</span><span class="command-text">switchport trunk allowed vlan --ID--</span></div>
+            <button class="copy-btn" onclick="copyLine('switchport trunk allowed vlan ')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('ip default-gateway --GW--')">Copiar</button>
-    </div>
-
-    <!-- SECCIÓN 4: TACACS+ -->
-    <h2>4. Seguridad TACACS+ (Acceso Remoto)</h2>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">tacacs-server host --IP-- / tacacs-server key --KEY--</span>
-            <span class="command-desc">Configurar servidor y clave secreta TACACS.</span>
+        <div class="command-row">
+            <div><span class="tag">UNI</span><span class="command-text">switchport mode access</span></div>
+            <button class="copy-btn" onclick="copyLine('switchport mode access')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('tacacs-server host --IP--\ntacacs-server key --KEY--\naaa authentication login default tacacs local\naaa authentication enable default tacacs local\naaa authorization exec default tacacs local\naaa accounting exec default start-stop tacacs')">Copiar</button>
+        <div class="command-row">
+            <div><span class="tag">UNI</span><span class="command-text">switchport qinq dot1q-tunnel</span></div>
+            <button class="copy-btn" onclick="copyLine('switchport qinq dot1q-tunnel')">Copiar</button>
+        </div>
     </div>
 
-    <!-- SECCIÓN 5: CIERRE -->
-    <h2>5. Guardado Final (Importante)</h2>
-    <div class="command-row">
-        <div class="command-info">
-            <span class="command-text">write</span>
-            <span class="command-desc">Guardar cambios en memoria flash (repetir 3 veces).</span>
+    <!-- 4. GESTIÓN -->
+    <h2><i class="fa-solid fa-server"></i> 4. IP y Gestión</h2>
+    <div class="command-group">
+        <div class="command-row">
+            <div><span class="command-text">interface ip 0</span></div>
+            <button class="copy-btn" onclick="copyLine('interface ip 0')">Copiar</button>
         </div>
-        <button class="copy-btn" onclick="copyText('write')">Copiar</button>
+        <div class="command-row">
+            <div><span class="command-text">ip address --IP-- 255.255.255.0 --VLAN--</span></div>
+            <button class="copy-btn" onclick="copyLine('ip address ')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="tag">RAX711</span><span class="command-text">ip default-gateway --GW--</span></div>
+            <button class="copy-btn" onclick="copyLine('ip default-gateway ')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="tag">RAX701</span><span class="command-text">ip route 0.0.0.0 0.0.0.0 --GW--</span></div>
+            <button class="copy-btn" onclick="copyLine('ip route 0.0.0.0 0.0.0.0 ')">Copiar</button>
+        </div>
+    </div>
+
+    <!-- 5. TACACS -->
+    <h2><i class="fa-solid fa-lock"></i> 5. Comandos TACACS (Uno a uno)</h2>
+    <div class="command-group">
+        <div class="command-row"><div><span class="command-text">tacacs-server host --IP--</span></div><button class="copy-btn" onclick="copyLine('tacacs-server host ')">Copiar</button></div>
+        <div class="command-row"><div><span class="command-text">tacacs-server key --KEY--</span></div><button class="copy-btn" onclick="copyLine('tacacs-server key ')">Copiar</button></div>
+        <div class="command-row"><div><span class="command-text">aaa authentication login default tacacs local</span></div><button class="copy-btn" onclick="copyLine('aaa authentication login default tacacs local')">Copiar</button></div>
+        <div class="command-row"><div><span class="command-text">aaa authentication enable default tacacs local</span></div><button class="copy-btn" onclick="copyLine('aaa authentication enable default tacacs local')">Copiar</button></div>
+    </div>
+
+    <!-- 6. GUARDADO -->
+    <h2><i class="fa-solid fa-floppy-disk"></i> 6. Finalizar</h2>
+    <div class="command-group">
+        <div class="command-row">
+            <div><span class="command-text">hostname --NOMBRE--</span></div>
+            <button class="copy-btn" onclick="copyLine('hostname ')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="command-text">write</span><span class="command-desc">(Ejecutar 3 veces)</span></div>
+            <button class="copy-btn" onclick="copyLine('write')">Copiar</button>
+        </div>
     </div>
 </div>
 
 <script>
-    function copyText(text) {
-        // Soporte para saltos de línea al copiar
-        const el = document.createElement('textarea');
-        el.value = text;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
+    function copyLine(text) {
+        const dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
         
-        // Notificación visual sencilla
-        alert("Comando(s) copiado(s):\n" + text);
+        // Efecto visual simple en la consola del navegador o alert opcional
+        console.log("Copiado: " + text);
     }
 </script>
 
