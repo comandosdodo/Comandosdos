@@ -7,155 +7,101 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; color: #333; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .container { max-width: 850px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
         h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #28a745; padding-bottom: 10px; }
         h2 { color: #1b5e20; font-size: 1.1rem; margin-top: 25px; display: flex; align-items: center; }
         h2 i { margin-right: 10px; color: #28a745; }
         .step-box { border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 15px; background: #fafafa; }
         .command-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; border-bottom: 1px solid #eee; }
         .command-row:last-child { border-bottom: none; }
-        .command-text { font-family: 'Consolas', monospace; font-weight: bold; color: #d63384; background: #fff; padding: 2px 5px; border-radius: 4px; border: 1px solid #ddd; }
-        .command-desc { font-size: 0.85rem; color: #666; margin-left: 10px; }
-        .copy-btn { background: #28a745; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
+        .command-text { font-family: 'Consolas', monospace; font-weight: bold; color: #d63384; background: #fff; padding: 2px 5px; border-radius: 4px; border: 1px solid #ddd; font-size: 0.9rem; }
+        .command-desc { font-size: 0.85rem; color: #666; margin-left: 10px; flex: 1; }
+        .copy-btn { background: #28a745; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; min-width: 70px; }
         .copy-btn:hover { background: #218838; }
-        .alert { background: #fff3cd; border-left: 5px solid #ffecb5; padding: 10px; font-size: 0.85rem; margin-bottom: 20px; border-radius: 4px; }
+        .info-panel { background: #e3f2fd; border-left: 5px solid #2196f3; padding: 15px; margin: 10px 0; border-radius: 5px; font-size: 0.9rem; }
+        .warning-panel { background: #fff3e0; border-left: 5px solid #ff9800; padding: 15px; margin: 10px 0; border-radius: 5px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Guía Técnica RAX (Paso a Paso)</h1>
+    <h1>Guía Técnica RAX (Flujo de Documento)</h1>
+
+    <!-- ... PASOS 1, 2 y 3 (Se mantienen igual) ... -->
+
+    <!-- PASO 4: GESTIÓN ESPECÍFICA -->
+    <h2><i class="fa-solid fa-network-wired"></i> PASO 4: Configuración de Gestión IP</h2>
     
-    <div class="alert">
-        <strong>Instrucciones:</strong> Sigue el orden de arriba hacia abajo. Reemplaza los valores marcados con <code>--</code> por los datos del servicio.
+    <div class="info-panel">
+        <strong>Explicación Técnica:</strong> La gestión se realiza sobre una interfaz lógica (<code>interface ip 0</code>). Es vital que la VLAN de gestión coincida con la configurada en el puerto NNI para tener acceso remoto.
     </div>
 
-    <!-- PASO 1: LIMPIEZA -->
-    <h2><i class="fa-solid fa-trash-can"></i> PASO 1: Limpieza de Configuración Previa</h2>
     <div class="step-box">
         <div class="command-row">
-            <div><span class="command-text">show vlan</span><span class="command-desc">Ver qué VLANs borrar</span></div>
-            <button class="copy-btn" onclick="copyText('show vlan')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">conf t</span><span class="command-desc">Entrar a configuración</span></div>
-            <button class="copy-btn" onclick="copyText('conf t')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">no vlan --ID--</span><span class="command-desc">Borrar VLAN de servicio/gestión</span></div>
-            <button class="copy-btn" onclick="copyText('no vlan ')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">interface --PUERTO--</span><span class="command-desc">Entrar al puerto a limpiar</span></div>
-            <button class="copy-btn" onclick="copyText('interface ')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">no switchport mode</span><span class="command-desc">Resetear modo del puerto</span></div>
-            <button class="copy-btn" onclick="copyText('no switchport mode')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">no description</span><span class="command-desc">Quitar nombre anterior</span></div>
-            <button class="copy-btn" onclick="copyText('no description')">Copiar</button>
-        </div>
-    </div>
-
-    <!-- PASO 2: CREACIÓN -->
-    <h2><i class="fa-solid fa-plus"></i> PASO 2: Creación de Nuevas VLANs</h2>
-    <div class="step-box">
-        <div class="command-row">
-            <div><span class="command-text">vlan --ID--</span><span class="command-desc">Crear ID de VLAN</span></div>
-            <button class="copy-btn" onclick="copyText('vlan ')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">state active</span><span class="command-desc">Activar VLAN</span></div>
-            <button class="copy-btn" onclick="copyText('state active')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">name --NOMBRE--</span><span class="command-desc">Asignar nombre</span></div>
-            <button class="copy-btn" onclick="copyText('name ')">Copiar</button>
-        </div>
-    </div>
-
-    <!-- PASO 3: INTERFACES -->
-    <h2><i class="fa-solid fa-ethernet"></i> PASO 3: Configuración de Puertos (NNI / UNI)</h2>
-    <div class="step-box">
-        <div class="command-row">
-            <div><span class="command-text">interface nni --PORT--</span><span class="command-desc">Configurar puerto Trunk (Red)</span></div>
-            <button class="copy-btn" onclick="copyText('interface nni ')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">switchport mode trunk</span><span class="command-desc">Habilitar troncal</span></div>
-            <button class="copy-btn" onclick="copyText('switchport mode trunk')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">switchport trunk allowed vlan --ID--</span><span class="command-desc">Permitir VLANs</span></div>
-            <button class="copy-btn" onclick="copyText('switchport trunk allowed vlan ')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">interface uni --PORT--</span><span class="command-desc">Configurar puerto Cliente</span></div>
-            <button class="copy-btn" onclick="copyText('interface uni ')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">switchport mode access</span><span class="command-desc">Modo acceso</span></div>
-            <button class="copy-btn" onclick="copyText('switchport mode access')">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div><span class="command-text">switchport access vlan --ID--</span><span class="command-desc">Asignar VLAN de servicio</span></div>
-            <button class="copy-btn" onclick="copyText('switchport access vlan ')">Copiar</button>
-        </div>
-    </div>
-
-    <!-- PASO 4: GESTIÓN -->
-    <h2><i class="fa-solid fa-network-wired"></i> PASO 4: IP de Gestión y Gateway</h2>
-    <div class="step-box">
-        <div class="command-row">
-            <div><span class="command-text">interface ip 0</span><span class="command-desc">Entrar a interfaz lógica</span></div>
+            <div><span class="command-text">interface ip 0</span><span class="command-desc">Entrar a la interfaz virtual de administración del equipo.</span></div>
             <button class="copy-btn" onclick="copyText('interface ip 0')">Copiar</button>
         </div>
         <div class="command-row">
-            <div><span class="command-text">ip address --IP-- 255.255.255.0 --VLAN--</span><span class="command-desc">IP y VLAN de gestión</span></div>
+            <div><span class="command-text">ip address --IP-- 255.255.255.0 --VLAN--</span><span class="command-desc">Asignar IP y asociarla a la VLAN de gestión.</span></div>
             <button class="copy-btn" onclick="copyText('ip address ')">Copiar</button>
         </div>
+    </div>
+
+    <div class="warning-panel">
+        <strong>Diferencia de Equipos (Rutas de Salida):</strong><br>
+        • <strong>RAX711 (4 Puertos):</strong> Utiliza el comando <code>default-gateway</code>.<br>
+        • <strong>RAX701 (1 Puerto):</strong> Suele requerir una ruta estática <code>0.0.0.0</code>.
+    </div>
+
+    <div class="step-box">
         <div class="command-row">
-            <div><span class="command-text">ip default-gateway --GW--</span><span class="command-desc">Gateway (RAX711)</span></div>
+            <div><span class="command-text">ip default-gateway --GW--</span><span class="command-desc"><strong>PARA RAX711:</strong> Configurar la IP del salto de salida.</span></div>
             <button class="copy-btn" onclick="copyText('ip default-gateway ')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="command-text">ip route 0.0.0.0 0.0.0.0 --GW--</span><span class="command-desc"><strong>PARA RAX701:</strong> Definir ruta por defecto para gestión.</span></div>
+            <button class="copy-btn" onclick="copyText('ip route 0.0.0.0 0.0.0.0 ')">Copiar</button>
         </div>
     </div>
 
     <!-- PASO 5: TACACS -->
-    <h2><i class="fa-solid fa-shield-halved"></i> PASO 5: Configuración TACACS+</h2>
+    <h2><i class="fa-solid fa-shield-halved"></i> PASO 5: Seguridad TACACS+ (Acceso Remoto)</h2>
+    <div class="info-panel">
+        <strong>Seguridad:</strong> Se debe configurar el servidor y luego habilitar <code>aaa</code>. Esto permite que el equipo valide usuarios centralizadamente pero mantenga el acceso local si el servidor falla.
+    </div>
+    
     <div class="step-box">
         <div class="command-row">
-            <div><span class="command-text">tacacs-server host --IP--</span><span class="command-desc">IP del servidor</span></div>
+            <div><span class="command-text">tacacs-server host --IP--</span><span class="command-desc">Dirección IP del servidor de autenticación.</span></div>
             <button class="copy-btn" onclick="copyText('tacacs-server host ')">Copiar</button>
         </div>
         <div class="command-row">
-            <div><span class="command-text">tacacs-server key --KEY--</span><span class="command-desc">Clave secreta</span></div>
+            <div><span class="command-text">tacacs-server key --KEY--</span><span class="command-desc">Clave compartida definida para el nodo.</span></div>
             <button class="copy-btn" onclick="copyText('tacacs-server key ')">Copiar</button>
         </div>
         <div class="command-row">
-            <div><span class="command-text">aaa authentication login default tacacs local</span><span class="command-desc">Autenticación</span></div>
+            <div><span class="command-text">aaa authentication login default tacacs local</span><span class="command-desc">Login: Primero TACACS, si falla, usa base local.</span></div>
             <button class="copy-btn" onclick="copyText('aaa authentication login default tacacs local')">Copiar</button>
         </div>
         <div class="command-row">
-            <div><span class="command-text">aaa authentication enable default tacacs local</span><span class="command-desc">Enable</span></div>
+            <div><span class="command-text">aaa authentication enable default tacacs local</span><span class="command-desc">Modo Enable: Validación vía TACACS/Local.</span></div>
             <button class="copy-btn" onclick="copyText('aaa authentication enable default tacacs local')">Copiar</button>
         </div>
         <div class="command-row">
-            <div><span class="command-text">aaa authorization exec default tacacs local</span><span class="command-desc">Permisos</span></div>
+            <div><span class="command-text">aaa authorization exec default tacacs local</span><span class="command-desc">Autorización para ejecutar comandos.</span></div>
             <button class="copy-btn" onclick="copyText('aaa authorization exec default tacacs local')">Copiar</button>
         </div>
     </div>
 
     <!-- PASO 6: GUARDADO -->
-    <h2><i class="fa-solid fa-floppy-disk"></i> PASO 6: Guardado y Verificación</h2>
+    <h2><i class="fa-solid fa-floppy-disk"></i> PASO 6: Finalización</h2>
     <div class="step-box">
         <div class="command-row">
-            <div><span class="command-text">exit</span><span class="command-desc">Salir de configuración</span></div>
-            <button class="copy-btn" onclick="copyText('exit')">Copiar</button>
+            <div><span class="command-text">hostname --NOMBRE--</span><span class="command-desc">Nombre descriptivo del Nodo/Cliente.</span></div>
+            <button class="copy-btn" onclick="copyText('hostname ')">Copiar</button>
         </div>
         <div class="command-row">
-            <div><span class="command-text">write</span><span class="command-desc">Guardar (Hacerlo 3 veces)</span></div>
+            <div><span class="command-text">write</span><span class="command-desc">Guardar en memoria flash (IMPORTANTE: Repetir 3 veces).</span></div>
             <button class="copy-btn" onclick="copyText('write')">Copiar</button>
         </div>
     </div>
@@ -169,4 +115,17 @@
         dummy.select();
         document.execCommand("copy");
         document.body.removeChild(dummy);
-        alert("Copiado:
+        // Notificación visual rápida
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = "¡Listo!";
+        btn.style.background = "#1b5e20";
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.background = "#28a745";
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
