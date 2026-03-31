@@ -220,7 +220,7 @@
         <button class="tab-btn active" onclick="showTab(event, 'rax')">RAX</button>
         <button class="tab-btn" onclick="showTab(event, 'rad')">RAD</button>
         <button class="tab-btn" onclick="showTab(event, 'huawei')">HUAWEI</button>
-        <button class="tab-btn" onclick="showTab(event, 'cisco')">CISCO</button>
+        <button class="tab-btn" onclick="showTab(event, 'ciena')">CIENA</button>
         <button class="tab-btn" onclick="showTab(event, 'asr')">ASR</button>
     </div>
 
@@ -245,9 +245,8 @@
         <div class="command-row"><div class="command-info"><span class="command-text">show configure port ethernet <span class="var-x"><puerto></span> statistics</span><span class="command-desc">Contadores de tráfico y errores</span></div><button class="copy-btn" onclick="copyTo('show configure port ethernet statistics', event)">Copiar</button></div>
     </div>
 
-    <!-- SECCIÓN HUAWEI (COMPLETA) -->
+    <!-- SECCIÓN HUAWEI COMPLETA -->
     <div id="huawei" class="command-section">
-        
         <div class="jump-nav">
             <a href="#huawei-agg" class="jump-btn"><i class="fa-solid fa-network-wired"></i> AGG</a>
             <a href="#huawei-edge" class="jump-btn"><i class="fa-solid fa-server"></i> EDGE</a>
@@ -281,44 +280,4 @@
             <div class="command-row"><div class="command-info"><span class="command-text">display vlan</span><span class="command-desc">Listar VLANs y sus puertos (Tagged/Untagged)</span></div><button class="copy-btn" onclick="copyTo('display vlan', event)">Copiar</button></div>
             <div class="command-row"><div class="command-info"><span class="command-text">display mac-address vlan <span class="var-x">ID</span></span><span class="command-desc">MACs aprendidas en la VLAN del cliente</span></div><button class="copy-btn" onclick="copyTo('display mac-address vlan ', event)">Copiar</button></div>
             <div class="command-row"><div class="command-info"><span class="command-text">display interface <span class="var-x">PUERTO</span></span><span class="command-desc">Estado físico, errores y utilización de ancho de banda</span></div><button class="copy-btn" onclick="copyTo('display interface ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display interface description <span class="var-x">PUERTO</span></span><span class="command-desc">Ver descripción específica del puerto</span></div><button class="copy-btn" onclick="copyTo('display interface description ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display transceiver diagnosis interface <span class="var-x">PUERTO</span></span><span class="command-desc">Niveles ópticos Tx/Rx (Potencia en dBm)</span></div><button class="copy-btn" onclick="copyTo('display transceiver diagnosis interface ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display logbuffer | include <span class="var-x">PUERTO</span></span><span class="command-desc">Logs de UP/DOWN históricos del puerto</span></div><button class="copy-btn" onclick="copyTo('display logbuffer | include ', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">display clock</span><span class="command-desc">Hora actual del switch</span></div><button class="copy-btn" onclick="copyTo('display clock', event)">Copiar</button></div>
-        </div>
-    </div>
-
-    <!-- OTRAS SECCIONES -->
-    <div id="cisco" class="command-section"><p style="text-align:center; color:#adb5bd">Pendiente cargar comandos CISCO...</p></div>
-    <div id="asr" class="command-section"><p style="text-align:center; color:#adb5bd">Pendiente cargar comandos ASR...</p></div>
-
-    <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Volver al menú principal</a>
-
-    <script>
-        function showTab(evt, teamId) {
-            document.querySelectorAll('.command-section').forEach(s => s.classList.remove('active-section'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            const target = document.getElementById(teamId);
-            if(target) {
-                target.classList.add('active-section');
-                evt.currentTarget.classList.add('active');
-            }
-        }
-
-        function copyTo(text, event) {
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                const originalText = btn.innerText;
-                btn.innerText = "¡Copiado!";
-                btn.style.background = "#007bff";
-                btn.style.color = "white";
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = ""; 
-                    btn.style.color = "";
-                }, 1200);
-            });
-        }
-    </script>
-</body>
-</html>
+            <div class="command-row"><div class="command-info"><span class="command-text">display transceiver diagnosis interface <span class="var-x">PUERTO</span>
