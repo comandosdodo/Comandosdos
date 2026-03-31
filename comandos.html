@@ -226,34 +226,26 @@
 
     <!-- SECCIÓN RAX -->
     <div id="rax" class="command-section active-section">
-        <div class="command-row">
-            <div class="command-info">
-                <span class="command-text">show interface</span>
-                <span class="command-desc">Estado general de interfaces (NNI/UNI)</span>
-            </div>
-            <button class="copy-btn" onclick="copyTo('show interface', event)">Copiar</button>
-        </div>
-        <div class="command-row">
-            <div class="command-info">
-                <span class="command-text">show version</span>
-                <span class="command-desc">Serial, MAC, Uptime y Modelo</span>
-            </div>
-            <button class="copy-btn" onclick="copyTo('show version', event)">Copiar</button>
-        </div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show interface</span><span class="command-desc">Estado general de interfaces (NNI/UNI)</span></div><button class="copy-btn" onclick="copyTo('show interface', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show version</span><span class="command-desc">Serial, MAC, Uptime y Modelo</span></div><button class="copy-btn" onclick="copyTo('show version', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show interface <span class="var-x">--puerto--</span> </span><span class="command-desc">Negociación, duplex y estado puerto</span></div><button class="copy-btn" onclick="copyTo('show interface ', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show interface <span class="var-x">--puerto--</span> description </span><span class="command-desc">Nombre del puerto</span></div><button class="copy-btn" onclick="copyTo('show interface --puerto-- description', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show transceiver ddm <span class="var-x">--puerto--</span></span><span class="command-desc">Muestra potencias ópticas del puerto</span></div><button class="copy-btn" onclick="copyTo('show transceiver ddm ', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show logging file | include <span class="var-x">--port--</span></span><span class="command-desc">Buscar caídas o logs específicos</span></div><button class="copy-btn" onclick="copyTo('show logging file | include ', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show clock</span><span class="command-desc">Verificar hora actual del sistema</span></div><button class="copy-btn" onclick="copyTo('show clock', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show running-config interface <span class="var-x">--puerto--</span></span><span class="command-desc">Configuración actual: VLANs, MTU, modo</span></div><button class="copy-btn" onclick="copyTo('show running-config interface ', event)">Copiar</button></div>
     </div>
 
     <!-- SECCIÓN RAD -->
     <div id="rad" class="command-section">
-        <div class="command-row">
-            <div class="command-info">
-                <span class="command-text">show configure port summary</span>
-                <span class="command-desc">Resumen de estado de todos los puertos</span>
-            </div>
-            <button class="copy-btn" onclick="copyTo('show configure port summary', event)">Copiar</button>
-        </div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure system device-information</span><span class="command-desc">Información general del equipo</span></div><button class="copy-btn" onclick="copyTo('show configure system device-information', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure system system-date</span><span class="command-desc">Fecha y hora configuradas</span></div><button class="copy-btn" onclick="copyTo('show configure system system-date', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure port summary</span><span class="command-desc">Resumen del estado de todos los puertos</span></div><button class="copy-btn" onclick="copyTo('show configure port summary', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure port ethernet <span class="var-x"><puerto></span> status</span><span class="command-desc">Estado detallado (link, velocidad, duplex)</span></div><button class="copy-btn" onclick="copyTo('show configure port ethernet status', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">show configure port ethernet <span class="var-x"><puerto></span> statistics</span><span class="command-desc">Contadores de tráfico y errores</span></div><button class="copy-btn" onclick="copyTo('show configure port ethernet statistics', event)">Copiar</button></div>
     </div>
 
-    <!-- SECCIÓN HUAWEI (ACTUALIZADA) -->
+    <!-- SECCIÓN HUAWEI (COMPLETA) -->
     <div id="huawei" class="command-section">
         
         <div class="jump-nav">
@@ -264,84 +256,35 @@
 
         <div id="huawei-agg">
             <div class="sub-header"><i class="fa-solid fa-network-wired"></i> Huawei AGG</div>
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display mpls l2vc <span class="var-x">VC_ID</span></span>
-                    <span class="command-desc">Ver detalles del Virtual Circuit MPLS</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display mpls l2vc ', event)">Copiar</button>
-            </div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration | section include <span class="var-x">X_ID</span></span><span class="command-desc">Ver configuración filtrada por ID</span></div><button class="copy-btn" onclick="copyTo('display current-configuration | section include ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display interface description</span><span class="command-desc">Listar descripciones de interfaces</span></div><button class="copy-btn" onclick="copyTo('display interface description', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration interface GigabitEthernet <span class="var-x">X/X/X</span></span><span class="command-desc">Configuración interfaz física</span></div><button class="copy-btn" onclick="copyTo('display current-configuration interface GigabitEthernet ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration interface GigabitEthernet <span class="var-x">X/X/X.sub</span></span><span class="command-desc">Configuración subinterfaz (Xconnect)</span></div><button class="copy-btn" onclick="copyTo('display current-configuration interface GigabitEthernet ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display mpls l2vc <span class="var-x">X_VC_ID</span></span><span class="command-desc">Detalles del Virtual Circuit (VC)</span></div><button class="copy-btn" onclick="copyTo('display mpls l2vc ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">ping vc ethernet <span class="var-x">ID</span> <span class="var-x">DEST</span> -c 10 -s 1504 label-alert</span><span class="command-desc">Ping E2E sobre VC ethernet</span></div><button class="copy-btn" onclick="copyTo('ping vc ethernet -c 10 -s 1504 label-alert', event)">Copiar</button></div>
         </div>
 
         <div id="huawei-edge">
             <div class="sub-header"><i class="fa-solid fa-server"></i> Huawei EDGE</div>
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display arp interface Virtual-Ethernet <span class="var-x">X/X/X.sub</span></span>
-                    <span class="command-desc">Mostrar tabla ARP del servicio</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display arp interface Virtual-Ethernet ', event)">Copiar</button>
-            </div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display current-configuration interface Virtual-Ethernet <span class="var-x">X/X/X.sub</span></span><span class="command-desc">Configuración subinterfaz Virtual-Ethernet</span></div><button class="copy-btn" onclick="copyTo('display current-configuration interface Virtual-Ethernet ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">telnet vrf <span class="var-x">VRF</span> <span class="var-x">IP</span> source-interface <span class="var-x">BVI</span> 443</span><span class="command-desc">Prueba Telnet puerto 443 desde VRF</span></div><button class="copy-btn" onclick="copyTo('telnet vrf source-interface 443', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display interface description | include <span class="var-x">CLIENTE</span></span><span class="command-desc">Buscar interfaz por nombre de cliente</span></div><button class="copy-btn" onclick="copyTo('display interface description | include ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display arp interface Virtual-Ethernet <span class="var-x">X/X/X.sub</span></span><span class="command-desc">Mostrar tabla ARP del servicio</span></div><button class="copy-btn" onclick="copyTo('display arp interface Virtual-Ethernet ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">ping -vpn-instance <span class="var-x">VRF</span> -brief -c 100 -m 10 -s 1400 -a <span class="var-x">ORIG</span> <span class="var-x">DEST</span></span><span class="command-desc">Ping desde VRF con origen y tamaño específico</span></div><button class="copy-btn" onclick="copyTo('ping -vpn-instance -brief -c 100 -m 10 -s 1400 -a ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display bgp vpnv4 vpn-instance <span class="var-x">VRF</span> peer</span><span class="command-desc">Estado del peer BGP en la VRF</span></div><button class="copy-btn" onclick="copyTo('display bgp vpnv4 vpn-instance peer | include ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display bgp vpnv4 vpn-instance <span class="var-x">VRF</span> routing-table peer <span class="var-x">IP</span> received-routes</span><span class="command-desc">Rutas recibidas BGP</span></div><button class="copy-btn" onclick="copyTo('display bgp vpnv4 vpn-instance routing-table peer received-routes', event)">Copiar</button></div>
         </div>
 
         <div id="huawei-last-mile">
             <div class="sub-header"><i class="fa-solid fa-house-signal"></i> Huawei Última Milla (S5735)</div>
-            
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display version</span>
-                    <span class="command-desc">Versión de software, modelo y uptime del switch</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display version', event)">Copiar</button>
-            </div>
-
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display vlan</span>
-                    <span class="command-desc">Muestra VLANs creadas y puertos Tagged/Untagged</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display vlan', event)">Copiar</button>
-            </div>
-
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display mac-address vlan <span class="var-x">ID</span></span>
-                    <span class="command-desc">Ver tablas de MAC aprendidas en una VLAN específica</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display mac-address vlan ', event)">Copiar</button>
-            </div>
-
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display interface <span class="var-x">PUERTO</span></span>
-                    <span class="command-desc">Estado físico, negociación, errores y tráfico actual</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display interface ', event)">Copiar</button>
-            </div>
-
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display transceiver diagnosis interface <span class="var-x">PUERTO</span></span>
-                    <span class="command-desc">Diagnóstico de SFP: Potencia Tx/Rx y temperaturas</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display transceiver diagnosis interface ', event)">Copiar</button>
-            </div>
-
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display logbuffer | include <span class="var-x">PUERTO</span></span>
-                    <span class="command-desc">Historial de logs/caídas del puerto seleccionado</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display logbuffer | include ', event)">Copiar</button>
-            </div>
-
-            <div class="command-row">
-                <div class="command-info">
-                    <span class="command-text">display clock</span>
-                    <span class="command-desc">Hora actual del sistema</span>
-                </div>
-                <button class="copy-btn" onclick="copyTo('display clock', event)">Copiar</button>
-            </div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display version</span><span class="command-desc">Versión, modelo y uptime (tiempo encendido)</span></div><button class="copy-btn" onclick="copyTo('display version', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display vlan</span><span class="command-desc">Listar VLANs y sus puertos (Tagged/Untagged)</span></div><button class="copy-btn" onclick="copyTo('display vlan', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display mac-address vlan <span class="var-x">ID</span></span><span class="command-desc">MACs aprendidas en la VLAN del cliente</span></div><button class="copy-btn" onclick="copyTo('display mac-address vlan ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display interface <span class="var-x">PUERTO</span></span><span class="command-desc">Estado físico, errores y utilización de ancho de banda</span></div><button class="copy-btn" onclick="copyTo('display interface ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display interface description <span class="var-x">PUERTO</span></span><span class="command-desc">Ver descripción específica del puerto</span></div><button class="copy-btn" onclick="copyTo('display interface description ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display transceiver diagnosis interface <span class="var-x">PUERTO</span></span><span class="command-desc">Niveles ópticos Tx/Rx (Potencia en dBm)</span></div><button class="copy-btn" onclick="copyTo('display transceiver diagnosis interface ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display logbuffer | include <span class="var-x">PUERTO</span></span><span class="command-desc">Logs de UP/DOWN históricos del puerto</span></div><button class="copy-btn" onclick="copyTo('display logbuffer | include ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">display clock</span><span class="command-desc">Hora actual del switch</span></div><button class="copy-btn" onclick="copyTo('display clock', event)">Copiar</button></div>
         </div>
     </div>
 
