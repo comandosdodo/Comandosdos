@@ -120,4 +120,87 @@
     </div>
     <div class="step-box">
         <div class="command-row">
-            <div><span class="command-text">interface ip 0</span><span class="command-desc">
+            <div><span class="command-text">interface ip 0</span><span class="command-desc">Configurar el puerto virtual de administración.</span></div>
+            <button class="copy-btn" onclick="copyText('interface ip 0')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="command-text">ip address --IP-- 255.255.255.0 --VLAN--</span><span class="command-desc">Asignar IP fija y amarrarla a la VLAN de Gestión creada.</span></div>
+            <button class="copy-btn" onclick="copyText('ip address ')">Copiar</button>
+        </div>
+    </div>
+    <div class="warning-panel">
+        <strong>Importante según el modelo:</strong> El <strong>RAX711</strong> responde mejor al comando <code>default-gateway</code>, mientras que el <strong>RAX701</strong> requiere la ruta estática manual para salir a internet/VPN.
+    </div>
+    <div class="step-box">
+        <div class="command-row">
+            <div><span class="command-text">ip default-gateway --GW--</span><span class="command-desc"><strong>SOLO RAX711:</strong> Gateway por defecto.</span></div>
+            <button class="copy-btn" onclick="copyText('ip default-gateway ')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="command-text">ip route 0.0.0.0 0.0.0.0 --GW--</span><span class="command-desc"><strong>SOLO RAX701:</strong> Ruta estática para alcanzar el Core.</span></div>
+            <button class="copy-btn" onclick="copyText('ip route 0.0.0.0 0.0.0.0 ')">Copiar</button>
+        </div>
+    </div>
+
+    <!-- PASO 5: TACACS -->
+    <h2><i class="fa-solid fa-user-shield"></i> PASO 5: Seguridad TACACS+</h2>
+    <div class="info-panel">
+        <strong>Acceso Seguro:</strong> Se debe configurar el servidor TACACS para que los técnicos entren con sus credenciales personales. La opción <code>local</code> al final es para evitar bloqueos si el servidor falla.
+    </div>
+    <div class="step-box">
+        <div class="command-row">
+            <div><span class="command-text">tacacs-server host --IP--</span><span class="command-desc">IP del servidor TACACS de la empresa.</span></div>
+            <button class="copy-btn" onclick="copyText('tacacs-server host ')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="command-text">tacacs-server key --KEY--</span><span class="command-desc">Shared Secret para encriptar la comunicación.</span></div>
+            <button class="copy-btn" onclick="copyText('tacacs-server key ')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="command-text">aaa authentication login default tacacs local</span><span class="command-desc">Si el servidor no responde, permite entrar con clave local.</span></div>
+            <button class="copy-btn" onclick="copyText('aaa authentication login default tacacs local')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="command-text">aaa authorization exec default tacacs local</span><span class="command-desc">Habilitar permisos de ejecución vía TACACS.</span></div>
+            <button class="copy-btn" onclick="copyText('aaa authorization exec default tacacs local')">Copiar</button>
+        </div>
+    </div>
+
+    <!-- PASO 6: GUARDADO -->
+    <h2><i class="fa-solid fa-floppy-disk"></i> PASO 6: Guardado de Configuración</h2>
+    <div class="warning-panel">
+        <strong>¡ATENCIÓN!</strong> En los equipos RAX, si no se ejecuta el comando <code>write</code>, todos los cambios se borran al reiniciar el equipo o si hay un corte de energía.
+    </div>
+    <div class="step-box">
+        <div class="command-row">
+            <div><span class="command-text">hostname --NOMBRE--</span><span class="command-desc">Identificar el equipo con nombre de nodo y cliente.</span></div>
+            <button class="copy-btn" onclick="copyText('hostname ')">Copiar</button>
+        </div>
+        <div class="command-row">
+            <div><span class="command-text">write</span><span class="command-desc">Guardar. <strong>Repetir 3 veces</strong> para asegurar escritura en flash.</span></div>
+            <button class="copy-btn" onclick="copyText('write')">Copiar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyText(text) {
+        const dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        
+        const btn = event.target;
+        btn.innerText = "¡Copiado!";
+        btn.style.background = "#1b5e20";
+        setTimeout(() => {
+            btn.innerText = "Copiar";
+            btn.style.background = "#28a745";
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
