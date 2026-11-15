@@ -288,7 +288,7 @@
         </div>
     </div>
 
-    <!-- SECCIÓN NOKIA -->
+     <!-- SECCIÓN NOKIA -->
     <div id="nokia" class="command-section">
 
         <div class="jump-nav">
@@ -317,4 +317,65 @@
             <div class="command-row"><div class="command-info"><span class="command-text">show router "Base" mpls lsp</span><span class="command-desc">Verifica que los túneles LSP estén operativos</span></div><button class="copy-btn" onclick="copyTo('show router &quot;Base&quot; mpls lsp', event)">Copiar</button></div>
             <div class="command-row"><div class="command-info"><span class="command-text">show router "Base" mpls lsp transit</span><span class="command-desc">Identifica si el nodo participa en el túnel como tránsito</span></div><button class="copy-btn" onclick="copyTo('show router &quot;Base&quot; mpls lsp transit', event)">Copiar</button></div>
             <div class="command-row"><div class="command-info"><span class="command-text">show router mpls lsp "<span class="var-x">NOMBRE_LSP</span>" path detail</span><span class="command-desc">Ruta, saltos, estado y labels de un LSP</span></div><button class="copy-btn" onclick="copyTo('show router mpls lsp &quot;NOMBRE_LSP&quot; path detail', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router rsvp neighbor</span><span class="command-desc">Vecinos RSVP, para
+            <div class="command-row"><div class="command-info"><span class="command-text">show router rsvp neighbor</span><span class="command-desc">Vecinos RSVP, para validar la ingeniería de tráfico (TE)</span></div><button class="copy-btn" onclick="copyTo('show router rsvp neighbor', event)">Copiar</button></div>
+        </div>
+
+        <div id="nokia-e2e">
+            <div class="sub-header"><i class="fa-solid fa-satellite-dish"></i> Nokia Pruebas End-to-End MPLS</div>
+            <div class="command-row"><div class="command-info"><span class="command-text">oam lsp-ping "<span class="var-x">NOMBRE_LSP</span>"</span><span class="command-desc">Comprueba la continuidad MPLS del túnel de punta a punta</span></div><button class="copy-btn" onclick="copyTo('oam lsp-ping &quot;NOMBRE_LSP&quot;', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">oam lsp-ping rsvp-te lsp-name <span class="var-x">NOMBRE_LSP</span></span><span class="command-desc">Ping a un LSP RSVP-TE. Ej: TO_CLRMLCOBOSRTCREG01</span></div><button class="copy-btn" onclick="copyTo('oam lsp-ping rsvp-te lsp-name NOMBRE_LSP', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">oam lsp-trace "<span class="var-x">NOMBRE_LSP</span>"</span><span class="command-desc">Traceroute sobre MPLS: muestra salto a salto dónde se corta el túnel</span></div><button class="copy-btn" onclick="copyTo('oam lsp-trace &quot;NOMBRE_LSP&quot;', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">oam lsp-trace rsvp-te lsp-name <span class="var-x">NOMBRE_LSP</span></span><span class="command-desc">Trace a un LSP RSVP-TE. Ej: TO_CLRMLCOBOSRTCREG01</span></div><button class="copy-btn" onclick="copyTo('oam lsp-trace rsvp-te lsp-name NOMBRE_LSP', event)">Copiar</button></div>
+        </div>
+
+        <div id="nokia-pw">
+            <div class="sub-header"><i class="fa-solid fa-link"></i> Nokia Pseudowire (Epipe / L2VPN)</div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show router ldp bindings services service-id <span class="var-x">ID</span> detail</span><span class="command-desc">VC-ID local y remoto, MTU, peer remoto y control-word. El comando más importante de un Epipe</span></div><button class="copy-btn" onclick="copyTo('show router ldp bindings services service-id ID detail', event)">Copiar</button></div>
+        </div>
+
+        <div id="nokia-checklist">
+            <div class="sub-header"><i class="fa-solid fa-list-check"></i> Nokia Checklist rápida de NOC</div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show service id <span class="var-x">ID</span> base
+show service id <span class="var-x">ID</span> endpoint
+show port <span class="var-x">X/X/X</span> detail
+show router "Base" ldp session
+show router "Base" mpls lsp
+show router ldp bindings services service-id <span class="var-x">ID</span> detail
+oam lsp-ping <span class="var-x">LSP</span>
+show log log-id 99 subject <span class="var-x">X/X/X</span></span><span class="command-desc">Cuando llegue un ticket Nokia, corre estos en orden. Con ellos ubicas si la falla está en: última milla (SAP/puerto), pseudowire (Epipe), SDP, MPLS/LDP, RSVP/LSP o transporte óptico aguas abajo</span></div><button class="copy-btn" onclick="copyTo('show service id ID base\nshow service id ID endpoint\nshow port X/X/X detail\nshow router &quot;Base&quot; ldp session\nshow router &quot;Base&quot; mpls lsp\nshow router ldp bindings services service-id ID detail\noam lsp-ping LSP\nshow log log-id 99 subject X/X/X', event)">Copiar</button></div>
+        </div>
+    </div>
+
+    <!-- OTRAS SECCIONES -->
+    <div id="asr" class="command-section"><p style="text-align:center; color:#adb5bd">Pendiente cargar comandos ASR...</p></div>
+
+    <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Volver al menú principal</a>
+
+    <script>
+        function showTab(evt, teamId) {
+            document.querySelectorAll('.command-section').forEach(s => s.classList.remove('active-section'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            const target = document.getElementById(teamId);
+            if(target) {
+                target.classList.add('active-section');
+                evt.currentTarget.classList.add('active');
+            }
+        }
+
+        function copyTo(text, event) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.innerText = "¡Copiado!";
+                btn.style.background = "#007bff";
+                btn.style.color = "white";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = ""; 
+                    btn.style.color = "";
+                }, 1200);
+            });
+        }
+    </script>
+</body>
+</html>
