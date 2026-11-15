@@ -3,283 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comandos de Equipos </title>
+    <title>Panel de Control Networking - Serena</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- Base --- */
+        /* --- 1. Base y Fondo --- */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: #f8f9fa;
             color: #495057;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 0;
-            padding: 30px 15px;
         }
-        .container {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 30px;
+        .container { 
+            text-align: center; 
+            padding: 40px; 
             background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 123, 255, 0.05);
+            max-width: 600px;
         }
-        .btn-volver {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            padding: 10px 16px;
+
+        h1 { 
+            margin-bottom: 50px; 
+            color: #007bff;
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            font-weight: 300;
+            font-size: 2rem;
+        }
+        
+        /* --- 3. Botones y Menú --- */
+        .menu-buttons {
+            display: flex;
+            flex-wrap: wrap; /* Permite que los botones bajen si no caben */
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .btn-menu {
+            padding: 25px 20px;
+            font-size: 1rem;
+            font-weight: 600;
             color: #007bff;
             background: #e3f2fd;
             border: 2px solid #b3e5fc;
-            border-radius: 10px;
+            border-radius: 12px;
+            cursor: pointer;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
-        .btn-volver:hover { background: #fff; border-color: #007bff; }
 
-        /* --- Sección Nokia --- */
-        .nk-wrap { text-align: left; }
-        .nk-wrap h2.nk-title {
-            text-align: center; color: #007bff; font-weight: 300;
-            letter-spacing: 3px; text-transform: uppercase; font-size: 1.8rem; margin: 0 0 8px;
+        /* Estilo especial para el tercer botón (centrado abajo) */
+        .btn-interes {
+            width: 250px;
+            margin-top: 10px;
+            color: #6f42c1; /* Color púrpura suave */
+            background: #f3e5f5;
+            border-color: #e1bee7;
         }
-        .nk-sub { text-align: center; color: #868e96; margin: 0 0 30px; }
 
-        .nk-group { margin-bottom: 30px; }
-        .nk-group-head {
-            display: flex; align-items: center; gap: 12px;
-            padding: 14px 18px; border-radius: 12px;
-            background: #e3f2fd; border: 2px solid #b3e5fc; color: #007bff;
+        .btn-menu i { font-size: 2.5rem; opacity: 0.8; }
+
+        .btn-menu:hover {
+            background: #ffffff;
+            border-color: #007bff;
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+            transform: translateY(-8px);
         }
-        .nk-group-head i { font-size: 1.4rem; }
-        .nk-group-head h3 { margin: 0; font-size: 1.1rem; }
-        .nk-group-head small { display: block; font-weight: 400; color: #5c7a99; margin-top: 2px; }
 
-        .nk-item {
-            margin-top: 14px; padding: 16px 18px; background: #fff;
-            border: 1px solid #e9ecef; border-radius: 12px;
-            box-shadow: 0 4px 14px rgba(0, 123, 255, 0.05);
+        .btn-config { color: #28a745; background: #e8f5e9; border-color: #c8e6c9; }
+        .btn-config:hover { border-color: #28a745; box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15); }
+        
+        .btn-interes:hover { border-color: #6f42c1; box-shadow: 0 8px 25px rgba(111, 66, 193, 0.15); }
+
+        /* --- 4. Ventana Modal (Links de Interés) --- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
         }
-        .nk-item h4 { margin: 0 0 8px; font-size: 1rem; color: #343a40; }
-        .nk-item p { margin: 10px 0 0; line-height: 1.5; }
 
-        .nk-code-label { margin: 8px 0 4px; font-size: 0.85rem; color: #868e96; }
-        .nk-code {
-            display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
-            background: #1e2530; color: #d6e4ff; border-radius: 8px; padding: 10px 12px;
-            font-family: Consolas, 'Courier New', monospace; font-size: 0.92rem;
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 400px;
+            text-align: left;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+            animation: slideDown 0.4s ease;
         }
-        .nk-code pre { margin: 0; white-space: pre-wrap; word-break: break-word; font: inherit; }
-        .nk-copy {
-            flex-shrink: 0; border: none; border-radius: 6px; cursor: pointer;
-            background: #2f3b4c; color: #b3e5fc; padding: 6px 10px; font-size: 0.8rem;
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif; transition: background 0.2s;
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-        .nk-copy:hover { background: #3d4d63; }
-        .nk-copy:focus-visible { outline: 2px solid #b3e5fc; outline-offset: 2px; }
-        .nk-copy.ok { background: #28a745; color: #fff; }
 
-        .nk-check { border-color: #c8e6c9; }
-        .nk-check .nk-group-head { background: #e8f5e9; border-color: #c8e6c9; color: #28a745; }
-        .nk-check .nk-group-head small { color: #5f8f69; }
-        .nk-result { margin: 12px 0 0; padding-left: 20px; line-height: 1.7; }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
 
-        @media (max-width: 480px) {
-            .container { padding: 20px 14px; }
-            .nk-wrap h2.nk-title { font-size: 1.4rem; letter-spacing: 2px; }
+        .close-modal { font-size: 28px; cursor: pointer; color: #aaa; }
+        .close-modal:hover { color: #000; }
+
+        .links-list { list-style: none; padding: 0; }
+        .links-list li { margin-bottom: 15px; }
+        .links-list a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #495057;
+            font-weight: 500;
+            padding: 12px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: 0.3s;
+        }
+        .links-list a:hover {
+            background: #e3f2fd;
+            color: #007bff;
+            transform: translateX(10px);
+        }
+
+        /* --- 5. Footer --- */
+        .footer-mensaje {
+            margin-top: 50px;
+            font-style: italic;
+            color: #868e96;
+            font-size: 1rem;
+            line-height: 1.6;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <a href="index.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al inicio</a>
+        <h1><i class="fa-solid fa-cloud-sun"></i> QUÉ HAREMOS HOY...</h1>
+        
+        <div class="menu-buttons">
+            <a href="comandos.html" class="btn-menu">
+                <i class="fa-solid fa-terminal"></i> <span>COMANDOS DE EQUIPOS</span>
+            </a>
+            
+            <a href="configuracion.html" class="btn-menu btn-config">
+                <i class="fa-solid fa-sliders"></i> <span>CONFIGURACIÓN DE EQUIPOS</span>
+            </a>
 
-        <!-- ===================== SECCIÓN NOKIA ===================== -->
-        <section class="nk-wrap" aria-labelledby="nk-title">
-            <h2 class="nk-title" id="nk-title"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> Nokia</h2>
-            <p class="nk-sub">Comandos para diagnosticar un ticket, en orden de uso. Toca "Copiar" para llevarte el comando.</p>
-            <div id="nk-root"></div>
-        </section>
-        <!-- ===================== FIN SECCIÓN NOKIA ===================== -->
+            <button class="btn-menu btn-interes" onclick="openModal()">
+                <i class="fa-solid fa-star"></i> <span>PÁGINAS DE INTERÉS</span>
+            </button>
+        </div>
+
+        <div class="footer-mensaje">
+            <p>
+                <i class="fa-solid fa-wind"></i> Epa, respira profundo. No te estreses. <br> 
+                ¡Dale con calma, que tú eres un crack! <i class="fa-solid fa-coffee"></i>
+            </p>
+        </div>
+    </div>
+
+    <div id="linksModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="margin:0; color:#6f42c1; font-size: 1.2rem;">Páginas de Interés</h2>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <ul class="links-list">
+                <li><a href="https://www.deepl.com/es/translator" target="_blank"><i class="fa-solid fa-language"></i> Traductor DeepL</a></li>
+                <li><a href="https://macvendors.com/" target="_blank"><i class="fa-solid fa-search"></i> Ver MAC Vendor</a></li>
+                <li><a href="https://mxtoolbox.com/blacklists.aspx" target="_blank"><i class="fa-solid fa-user-slash"></i> Lista Negra (Blacklist)</a></li>
+                <li><a href="https://n1ufiherramientas.github.io/ufiherramientas/" target="_blank"><i class="fa-solid fa-table"></i> Tablas y Scripts</a></li>
+                <li><a href="https://www.abuseipdb.com/" target="_blank"><i class="fa-solid fa-shield-halved"></i> AbuseIPDB</a></li>
+                <li><a href="https://ufinetlatam.sharepoint.com/sites/PlanificacindeRed315/SitePages/Wiki.aspx" target="_blank"><i class="fa-solid fa-book"></i> Wiki Configuración de Equipos</a></li>
+            </ul>
+        </div>
     </div>
 
     <script>
-    (function () {
-        // Para agregar un comando nuevo: copia un bloque { t: "...", d: "...", c: [...] } dentro de "items".
-        // En "c": { c: "comando" } y opcionalmente l: "Ejemplo:" u "o" como etiqueta.
-        var DATA = [
-            {
-                icon: "fa-plug",
-                title: "1. Validar última milla (cliente)",
-                sub: "Empieza aquí: ¿el problema está en el puerto o servicio del cliente?",
-                items: [
-                    { t: "Ver estado del servicio",
-                      c: [{ c: "show service id <SERVICE-ID> base" }],
-                      d: "Dice si el servicio está Up o Down, cuándo cambió por última vez y qué SDP y SAP tiene. Es lo primero que se mira (como buscar el estado del servicio en Huawei)." },
-                    { t: "Ver redundancia y camino activo",
-                      c: [{ c: "show service id <SERVICE-ID> endpoint" }],
-                      d: "Muestra cuál SDP está activo y cuál en standby, cuándo fue el último cambio de camino (switchover) y el estado real del circuito. Muy útil cuando el cliente reporta intermitencia." },
-                    { t: "Monitorear tráfico de la última milla",
-                      c: [{ c: "monitor service id <SERVICE-ID> sap <PUERTO:VLAN> rate" },
-                          { l: "Ejemplo:", c: "monitor service id 127046 sap 2/1/16:1880 rate" }],
-                      d: "Ve en vivo cuánto tráfico pasa y si hay descartes. Sirve para confirmar si el enlace está saturado." },
-                    { t: "Revisar interfaz física",
-                      c: [{ c: "show port 1/1/1 detail" }, { l: "o", c: "show port 1/1/1" }],
-                      d: "Estado físico, velocidad y contadores de errores: CRC, LOS y flaps. Parecido a un display interface en Huawei." },
-                    { t: "Buscar caídas del puerto",
-                      c: [{ c: "show log log-id 99 subject 1/1/1" }],
-                      d: "Lista los eventos del puerto en el log, así ves cuándo cayó y cuándo volvió." }
-                ]
-            },
-            {
-                icon: "fa-route",
-                title: "2. Validar MPLS",
-                sub: "Úsalos cuando sospechas del transporte y no de la última milla.",
-                items: [
-                    { t: "Ver sesiones LDP",
-                      c: [{ c: 'show router "Base" ldp session' }],
-                      d: "Todas las sesiones deben estar Up. Si alguna está caída, ahí hay un problema de transporte." },
-                    { t: "Ver labels aprendidos",
-                      c: [{ c: "show router ldp bindings active" }, { l: "o", c: "show router ldp bindings" }],
-                      d: "Confirma que los equipos están intercambiando labels (las etiquetas MPLS)." },
-                    { t: "Ver LSP",
-                      c: [{ c: 'show router "Base" mpls lsp' }],
-                      d: "Verifica que los túneles LSP estén operativos." },
-                    { t: "Ver LSP de tránsito",
-                      c: [{ c: 'show router "Base" mpls lsp transit' }],
-                      d: "Te dice si este nodo es parte del camino de un túnel (nodo intermedio)." },
-                    { t: "Ver detalle de un LSP",
-                      c: [{ c: 'show router mpls lsp "<NOMBRE_LSP>" path detail' }],
-                      d: "Muestra la ruta que sigue, los saltos, el estado y los labels del túnel." },
-                    { t: "Ver vecinos RSVP",
-                      c: [{ c: "show router rsvp neighbor" }],
-                      d: "Valida los vecinos RSVP, que son la base de la ingeniería de tráfico (TE)." }
-                ]
-            },
-            {
-                icon: "fa-satellite-dish",
-                title: "3. Pruebas end-to-end MPLS",
-                sub: "Las más útiles al escalar un caso.",
-                items: [
-                    { t: "Ping al LSP",
-                      c: [{ c: 'oam lsp-ping "<NOMBRE_LSP>"' },
-                          { l: "Ejemplo:", c: "oam lsp-ping rsvp-te lsp-name TO_CLRMLCOBOSRTCREG01" }],
-                      d: "Comprueba que hay continuidad MPLS de punta a punta por ese túnel." },
-                    { t: "Trace del LSP",
-                      c: [{ c: 'oam lsp-trace "<NOMBRE_LSP>"' },
-                          { l: "o", c: "oam lsp-trace rsvp-te lsp-name TO_CLRMLCOBOSRTCREG01" }],
-                      d: "Es como un traceroute pero sobre MPLS: muestra salto a salto dónde se corta el túnel." }
-                ]
-            },
-            {
-                icon: "fa-link",
-                title: "4. Validar pseudowire (Epipe)",
-                sub: "Si el servicio es L2VPN.",
-                items: [
-                    { t: "Ver detalles del PW",
-                      c: [{ c: "show router ldp bindings services service-id <ID> detail" }],
-                      d: "Muestra VC-ID local y remoto, MTU local y remota, peer remoto y control-word. Probablemente el comando más importante de un Epipe: si algo no coincide entre ambos lados, se ve aquí." }
-                ]
+        function openModal() {
+            document.getElementById("linksModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("linksModal").style.display = "none";
+        }
+
+        // Cerrar si hace clic fuera de la cajita blanca
+        window.onclick = function(event) {
+            let modal = document.getElementById("linksModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
-        ];
-
-        var CHECKLIST = [
-            "show service id <ID> base",
-            "show service id <ID> endpoint",
-            "show port X/X/X detail",
-            'show router "Base" ldp session',
-            'show router "Base" mpls lsp',
-            "show router ldp bindings services service-id <ID> detail",
-            "oam lsp-ping <LSP>",
-            "show log log-id 99 subject X/X/X"
-        ];
-
-        var RESULTS = [
-            "Última milla (SAP/puerto)",
-            "Pseudowire (Epipe)",
-            "SDP",
-            "MPLS/LDP",
-            "RSVP/LSP",
-            "Transporte óptico aguas abajo"
-        ];
-
-        function el(tag, cls, text) {
-            var e = document.createElement(tag);
-            if (cls) e.className = cls;
-            if (text) e.textContent = text;
-            return e;
         }
-
-        function codeBox(text) {
-            var box = el("div", "nk-code");
-            var pre = el("pre", null, text);
-            var btn = el("button", "nk-copy");
-            btn.type = "button";
-            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i> Copiar';
-            btn.addEventListener("click", function () {
-                function done() {
-                    btn.classList.add("ok");
-                    btn.textContent = "Copiado";
-                    setTimeout(function () {
-                        btn.classList.remove("ok");
-                        btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i> Copiar';
-                    }, 1500);
-                }
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(text).then(done);
-                } else {
-                    var ta = el("textarea"); ta.value = text; document.body.appendChild(ta);
-                    ta.select(); document.execCommand("copy"); ta.remove(); done();
-                }
-            });
-            box.appendChild(pre);
-            box.appendChild(btn);
-            return box;
-        }
-
-        function groupHead(icon, title, sub) {
-            var h = el("div", "nk-group-head");
-            var i = el("i", "fa-solid " + icon); i.setAttribute("aria-hidden", "true");
-            var wrap = el("div");
-            wrap.appendChild(el("h3", null, title));
-            wrap.appendChild(el("small", null, sub));
-            h.appendChild(i); h.appendChild(wrap);
-            return h;
-        }
-
-        var root = document.getElementById("nk-root");
-
-        DATA.forEach(function (g) {
-            var group = el("div", "nk-group");
-            group.appendChild(groupHead(g.icon, g.title, g.sub));
-            g.items.forEach(function (it) {
-                var card = el("div", "nk-item");
-                card.appendChild(el("h4", null, it.t));
-                it.c.forEach(function (cmd) {
-                    if (cmd.l) card.appendChild(el("div", "nk-code-label", cmd.l));
-                    card.appendChild(codeBox(cmd.c));
-                });
-                card.appendChild(el("p", null, it.d));
-                group.appendChild(card);
-            });
-            root.appendChild(group);
-        });
-
-        // 5. Checklist rápida
-        var chk = el("div", "nk-group nk-check");
-        chk.appendChild(groupHead("fa-list-check", "5. Checklist rápida de NOC", "Cuando llegue un ticket Nokia, corre estos comandos en orden."));
-        var card = el("div", "nk-item");
-        card.appendChild(codeBox(CHECKLIST.join("\n")));
-        card.appendChild(el("p", null, "Con esto normalmente puedes saber en qué parte está la falla:"));
-        var ul = el("ul", "nk-result");
-        RESULTS.forEach(function (r) { ul.appendChild(el("li", null, r)); });
-        card.appendChild(ul);
-        chk.appendChild(card);
-        root.appendChild(chk);
-    })();
     </script>
-
-</body>
-</html>
