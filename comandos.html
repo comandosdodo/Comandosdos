@@ -222,6 +222,7 @@
         <button class="tab-btn" onclick="showTab(event, 'huawei')">HUAWEI</button>
         <button class="tab-btn" onclick="showTab(event, 'nokia')">NOKIA</button>
         <button class="tab-btn" onclick="showTab(event, 'ciena')">CIENA</button>
+        <button class="tab-btn" onclick="showTab(event, 'juniper')">JUNIPER</button>
     </div>
 
     <!-- SECCIÓN RAX -->
@@ -358,6 +359,37 @@ show log log-id 99 subject <span class="var-x">X/X/X</span></span><span class="c
         <div class="command-row"><div class="command-info"><span class="command-text">Flow mac-address show</span><span class="command-desc">Permite ver las MAC address asociadas a las VLAN y a los puertos por donde se están transmitiendo.</span></div><button class="copy-btn" onclick="copyTo('Flow mac-address show', event)">Copiar</button></div>
     </div>
 
+        <!-- SECCIÓN JUNIPER -->
+    <div id="juniper" class="command-section">
+
+        <div class="jump-nav">
+            <a href="#juniper-cpe" class="jump-btn"><i class="fa-solid fa-house-signal"></i> CPE (Cliente)</a>
+            <a href="#juniper-mpls" class="jump-btn"><i class="fa-solid fa-route"></i> MPLS</a>
+        </div>
+
+        <div id="juniper-cpe">
+            <div class="sub-header"><i class="fa-solid fa-house-signal"></i> Juniper CPE (Cliente)</div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show interfaces</span><span class="command-desc">Información general de los puertos. Cada puerto tiene una interfaz física (estado UP/DOWN) y una lógica (configuración IP)</span></div><button class="copy-btn" onclick="copyTo('show interfaces', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show interfaces fe-0/0/<span class="var-x">#</span></span><span class="command-desc">Filtra un solo puerto: cambia # por el número de la interfaz. Revisa "Physical link is Up" y las tasas de entrada y salida</span></div><button class="copy-btn" onclick="copyTo('show interfaces fe-0/0/', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show arp</span><span class="command-desc">Muestra las IP con su MAC asociada. Sirve para confirmar que el equipo del cliente está respondiendo</span></div><button class="copy-btn" onclick="copyTo('show arp', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">clear arp hostname <span class="var-x">IP</span></span><span class="command-desc">Limpia el registro de la MAC de esa IP. Úsalo cuando cambian el equipo del cliente y la IP sigue con la MAC vieja</span></div><button class="copy-btn" onclick="copyTo('clear arp hostname ', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show configuration</span><span class="command-desc">Muestra la configuración completa del equipo</span></div><button class="copy-btn" onclick="copyTo('show configuration', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show configuration | display set</span><span class="command-desc">Muestra la configuración en formato de comandos (set), más fácil de leer y comparar</span></div><button class="copy-btn" onclick="copyTo('show configuration | display set', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">ping 8.8.8.8 source <span class="var-x">IP_GATEWAY</span></span><span class="command-desc">Valida la entrega del servicio de internet. Si el puerto donde está la IP pública (gateway) está DOWN, la prueba no responde</span></div><button class="copy-btn" onclick="copyTo('ping 8.8.8.8 source ', event)">Copiar</button></div>
+        </div>
+
+        <div id="juniper-mpls">
+            <div class="sub-header"><i class="fa-solid fa-route"></i> Juniper MPLS (Transporte)</div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show mpls lsp</span><span class="command-desc">Estado de los túneles LSP. Deben estar Up; si uno cae, el servicio que pasa por él se interrumpe</span></div><button class="copy-btn" onclick="copyTo('show mpls lsp', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show ldp session</span><span class="command-desc">Sesiones LDP con los vecinos. Deben estar en estado Operational</span></div><button class="copy-btn" onclick="copyTo('show ldp session', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show ldp neighbor</span><span class="command-desc">Vecinos LDP descubiertos. Si falta uno, hay un problema de transporte hacia ese nodo</span></div><button class="copy-btn" onclick="copyTo('show ldp neighbor', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show rsvp session</span><span class="command-desc">Sesiones RSVP de los túneles con ingeniería de tráfico</span></div><button class="copy-btn" onclick="copyTo('show rsvp session', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show l2circuit connections</span><span class="command-desc">Estado de los pseudowires (L2VPN). Útil si el servicio del cliente es de capa 2</span></div><button class="copy-btn" onclick="copyTo('show l2circuit connections', event)">Copiar</button></div>
+            <div class="command-row"><div class="command-info"><span class="command-text">show route table mpls.0</span><span class="command-desc">Tabla de labels MPLS del equipo</span></div><button class="copy-btn" onclick="copyTo('show route table mpls.0', event)">Copiar</button></div>
+        </div>
+    </div>
+
+    
     <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Volver al menú principal</a>
 
     <script>
