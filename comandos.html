@@ -221,7 +221,7 @@
         <button class="tab-btn" onclick="showTab(event, 'rad')">RAD</button>
         <button class="tab-btn" onclick="showTab(event, 'huawei')">HUAWEI</button>
         <button class="tab-btn" onclick="showTab(event, 'nokia')">NOKIA</button>
-        <button class="tab-btn" onclick="showTab(event, 'asr')">ASR</button>
+        <button class="tab-btn" onclick="showTab(event, 'ciena')">CIENA</button>
     </div>
 
     <!-- SECCIÓN RAX -->
@@ -346,18 +346,16 @@ show log log-id 99 subject <span class="var-x">X/X/X</span></span><span class="c
         </div>
     </div>
 
-    <!-- OTRAS SECCIONES -->
-    <div id="CIENA" class="command-section">
-        <div class="command-row"><div class="command-info"><span class="command-text">Port show</span><span class="command-desc">este comando muestra la información general de los Puertos del equipo.</span></div><button class="copy-btn" onclick="copyTo('show configure system device-information', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">Port show status</span><span class="command-desc">muestra información de los puertos con descripción.</span></div><button class="copy-btn" onclick="copyTo('show configure system system-date', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">Port show port #numeropuerto</span><span class="command-desc">este comando muestra la configuración colocada sobre el puerto y la configuración operativa.</span></div><button class="copy-btn" onclick="copyTo('show configure port summary', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">Port xcvr show<span class="var-x"><puerto></span> status</span><span class="command-desc">muestra los puertos con Transceiver y la información base del Transceiver</span></div><button class="copy-btn" onclick="copyTo('show configure port ethernet status', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">Port xcvr port #numeropuerto<span class="var-x"><puerto></span> statistics</span><span class="command-desc">muestra la información del Transceiver
-Nos interesa saber la Capacidad, Distancia y Longitud de honda</span></div><button class="copy-btn" onclick="copyTo('show configure port ethernet statistics', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">Port xcvr sh port # diagnostic</span><span class="command-desc">muestra los niveles de señal de los puertos con Transceiver, estos valores van a cambiar dependiendo del Ciena y del Transceiver.</span></div><button class="copy-btn" onclick="copyTo('show configure system device-information', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">Vlan show</span><span class="command-desc">muestra el listado de vlans y los puertos en los que están asignadas.</span></div><button class="copy-btn" onclick="copyTo('show configure system system-date', event)">Copiar</button></div>
-        <div class="command-row"><div class="command-info"><span class="command-text">Flow mac-address show</span><span class="command-desc">con este comando podremos ver las mac-address asociadas a las vlan y a los puertos por donde se están transmitiendo.</span></div><button class="copy-btn" onclick="copyTo('show configure port summary', event)">Copiar</button></div>
-
+        <!-- SECCIÓN CIENA -->
+    <div id="ciena" class="command-section">
+        <div class="command-row"><div class="command-info"><span class="command-text">Port show</span><span class="command-desc">Este comando muestra la información general de los puertos del equipo.</span></div><button class="copy-btn" onclick="copyTo('Port show', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">Port show status</span><span class="command-desc">Muestra información de los puertos con descripción.</span></div><button class="copy-btn" onclick="copyTo('Port show status', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">Port show port <span class="var-x">#numeropuerto</span></span><span class="command-desc">Muestra la configuración colocada sobre el puerto y la configuración operativa.</span></div><button class="copy-btn" onclick="copyTo('Port show port #numeropuerto', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">Port xcvr show status</span><span class="command-desc">Muestra los puertos con Transceiver y la información base del Transceiver.</span></div><button class="copy-btn" onclick="copyTo('Port xcvr show status', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">Port xcvr port <span class="var-x">#numeropuerto</span> statistics</span><span class="command-desc">Muestra la información del Transceiver. Nos interesa saber la capacidad, distancia y longitud de onda.</span></div><button class="copy-btn" onclick="copyTo('Port xcvr port #numeropuerto statistics', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">Port xcvr sh port <span class="var-x">#</span> diagnostic</span><span class="command-desc">Muestra los niveles de señal de los puertos con Transceiver. Estos valores cambian según el Ciena y el Transceiver.</span></div><button class="copy-btn" onclick="copyTo('Port xcvr sh port # diagnostic', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">Vlan show</span><span class="command-desc">Muestra el listado de VLANs y los puertos en los que están asignadas.</span></div><button class="copy-btn" onclick="copyTo('Vlan show', event)">Copiar</button></div>
+        <div class="command-row"><div class="command-info"><span class="command-text">Flow mac-address show</span><span class="command-desc">Permite ver las MAC address asociadas a las VLAN y a los puertos por donde se están transmitiendo.</span></div><button class="copy-btn" onclick="copyTo('Flow mac-address show', event)">Copiar</button></div>
     </div>
 
     <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Volver al menú principal</a>
