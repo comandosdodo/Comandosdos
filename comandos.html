@@ -289,63 +289,67 @@
         </div>
     </div>
 
-     <!-- SECCIÓN NOKIA -->
-    <div id="nokia" class="command-section">
+     
+    <!-- SECCIÓN NOKIA EDGE -->
+<div id="nokia" class="command-section">
 
-        <div class="jump-nav">
-            <a href="#nokia-ultima-milla" class="jump-btn"><i class="fa-solid fa-house-signal"></i> Última Milla</a>
-            <a href="#nokia-mpls" class="jump-btn"><i class="fa-solid fa-route"></i> MPLS</a>
-            <a href="#nokia-e2e" class="jump-btn"><i class="fa-solid fa-satellite-dish"></i> End-to-End</a>
-            <a href="#nokia-pw" class="jump-btn"><i class="fa-solid fa-link"></i> Pseudowire</a>
-            <a href="#nokia-checklist" class="jump-btn"><i class="fa-solid fa-list-check"></i> Checklist</a>
-        </div>
-
-        <div id="nokia-ultima-milla">
-            <div class="sub-header"><i class="fa-solid fa-house-signal"></i> Nokia Última Milla (Cliente)</div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show service id <span class="var-x">SERVICE-ID</span> base</span><span class="command-desc">Estado del servicio (Up/Down), último cambio, SDP y SAP asociados. Es lo primero que se revisa</span></div><button class="copy-btn" onclick="copyTo('show service id SERVICE-ID base', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show service id <span class="var-x">SERVICE-ID</span> endpoint</span><span class="command-desc">SDP activo y standby, último switchover y estado real del circuito. Útil si hay intermitencia</span></div><button class="copy-btn" onclick="copyTo('show service id SERVICE-ID endpoint', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">monitor service id <span class="var-x">SERVICE-ID</span> sap <span class="var-x">PUERTO:VLAN</span> rate</span><span class="command-desc">Tráfico en vivo y descartes por saturación. Ej: monitor service id 127046 sap 2/1/16:1880 rate</span></div><button class="copy-btn" onclick="copyTo('monitor service id SERVICE-ID sap PUERTO:VLAN rate', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show port <span class="var-x">X/X/X</span> detail</span><span class="command-desc">Estado físico, velocidad, errores, CRC, LOS y flaps (como display interface en Huawei)</span></div><button class="copy-btn" onclick="copyTo('show port X/X/X detail', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show port <span class="var-x">X/X/X</span></span><span class="command-desc">Versión corta del estado del puerto</span></div><button class="copy-btn" onclick="copyTo('show port X/X/X', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show log log-id 99 subject <span class="var-x">X/X/X</span></span><span class="command-desc">Eventos y caídas del puerto: cuándo cayó y cuándo volvió</span></div><button class="copy-btn" onclick="copyTo('show log log-id 99 subject X/X/X', event)">Copiar</button></div>
-        </div>
-
-        <div id="nokia-mpls">
-            <div class="sub-header"><i class="fa-solid fa-route"></i> Nokia MPLS (Transporte)</div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router "Base" ldp session</span><span class="command-desc">Sesiones LDP, todas deben estar Up</span></div><button class="copy-btn" onclick="copyTo('show router &quot;Base&quot; ldp session', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router ldp bindings active</span><span class="command-desc">Labels activos aprendidos (intercambio de etiquetas MPLS)</span></div><button class="copy-btn" onclick="copyTo('show router ldp bindings active', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router ldp bindings</span><span class="command-desc">Todos los labels intercambiados</span></div><button class="copy-btn" onclick="copyTo('show router ldp bindings', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router "Base" mpls lsp</span><span class="command-desc">Verifica que los túneles LSP estén operativos</span></div><button class="copy-btn" onclick="copyTo('show router &quot;Base&quot; mpls lsp', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router "Base" mpls lsp transit</span><span class="command-desc">Identifica si el nodo participa en el túnel como tránsito</span></div><button class="copy-btn" onclick="copyTo('show router &quot;Base&quot; mpls lsp transit', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router mpls lsp "<span class="var-x">NOMBRE_LSP</span>" path detail</span><span class="command-desc">Ruta, saltos, estado y labels de un LSP</span></div><button class="copy-btn" onclick="copyTo('show router mpls lsp &quot;NOMBRE_LSP&quot; path detail', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router rsvp neighbor</span><span class="command-desc">Vecinos RSVP, para validar la ingeniería de tráfico (TE)</span></div><button class="copy-btn" onclick="copyTo('show router rsvp neighbor', event)">Copiar</button></div>
-        </div>
-
-        <div id="nokia-e2e">
-            <div class="sub-header"><i class="fa-solid fa-satellite-dish"></i> Nokia Pruebas End-to-End MPLS</div>
-            <div class="command-row"><div class="command-info"><span class="command-text">oam lsp-ping "<span class="var-x">NOMBRE_LSP</span>"</span><span class="command-desc">Comprueba la continuidad MPLS del túnel de punta a punta</span></div><button class="copy-btn" onclick="copyTo('oam lsp-ping &quot;NOMBRE_LSP&quot;', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">oam lsp-ping rsvp-te lsp-name <span class="var-x">NOMBRE_LSP</span></span><span class="command-desc">Ping a un LSP RSVP-TE. Ej: TO_CLRMLCOBOSRTCREG01</span></div><button class="copy-btn" onclick="copyTo('oam lsp-ping rsvp-te lsp-name NOMBRE_LSP', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">oam lsp-trace "<span class="var-x">NOMBRE_LSP</span>"</span><span class="command-desc">Traceroute sobre MPLS: muestra salto a salto dónde se corta el túnel</span></div><button class="copy-btn" onclick="copyTo('oam lsp-trace &quot;NOMBRE_LSP&quot;', event)">Copiar</button></div>
-            <div class="command-row"><div class="command-info"><span class="command-text">oam lsp-trace rsvp-te lsp-name <span class="var-x">NOMBRE_LSP</span></span><span class="command-desc">Trace a un LSP RSVP-TE. Ej: TO_CLRMLCOBOSRTCREG01</span></div><button class="copy-btn" onclick="copyTo('oam lsp-trace rsvp-te lsp-name NOMBRE_LSP', event)">Copiar</button></div>
-        </div>
-
-        <div id="nokia-pw">
-            <div class="sub-header"><i class="fa-solid fa-link"></i> Nokia Pseudowire (Epipe / L2VPN)</div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show router ldp bindings services service-id <span class="var-x">ID</span> detail</span><span class="command-desc">VC-ID local y remoto, MTU, peer remoto y control-word. El comando más importante de un Epipe</span></div><button class="copy-btn" onclick="copyTo('show router ldp bindings services service-id ID detail', event)">Copiar</button></div>
-        </div>
-
-        <div id="nokia-checklist">
-            <div class="sub-header"><i class="fa-solid fa-list-check"></i> Nokia Checklist rápida de NOC</div>
-            <div class="command-row"><div class="command-info"><span class="command-text">show service id <span class="var-x">ID</span> base
-show service id <span class="var-x">ID</span> endpoint
-show port <span class="var-x">X/X/X</span> detail
-show router "Base" ldp session
-show router "Base" mpls lsp
-show router ldp bindings services service-id <span class="var-x">ID</span> detail
-oam lsp-ping <span class="var-x">LSP</span>
-show log log-id 99 subject <span class="var-x">X/X/X</span></span><span class="command-desc">Cuando llegue un ticket Nokia, corre estos en orden. Con ellos ubicas si la falla está en: última milla (SAP/puerto), pseudowire (Epipe), SDP, MPLS/LDP, RSVP/LSP o transporte óptico aguas abajo</span></div><button class="copy-btn" onclick="copyTo('show service id ID base\nshow service id ID endpoint\nshow port X/X/X detail\nshow router &quot;Base&quot; ldp session\nshow router &quot;Base&quot; mpls lsp\nshow router ldp bindings services service-id ID detail\noam lsp-ping LSP\nshow log log-id 99 subject X/X/X', event)">Copiar</button></div>
-        </div>
+    <div class="jump-nav">
+        <a href="#nokia-edge" class="jump-btn">
+            <i class="fa-solid fa-globe"></i> Edge Internet
+        </a>
+        <a href="#nokia-checklist" class="jump-btn">
+            <i class="fa-solid fa-list-check"></i> Checklist
+        </a>
     </div>
+
+    <div id="nokia-edge">
+        <div class="sub-header">
+            <i class="fa-solid fa-globe"></i> Nokia Edge Internet (VPRN)
+        </div>
+
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show service service-using | match <span class="var-x">SERVICIO</span></span>
+                <span class="command-desc">Busca el servicio y obtiene el Service-ID asociado.</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show service service-using | match SERVICIO', event)">Copiar</button>
+        </div>
+
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show service id <span class="var-x">SERVICE-ID</span> base</span>
+                <span class="command-desc">Estado del VPRN, SAPs asociados, Route Distinguisher y estado operativo.</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show service id SERVICE-ID base', event)">Copiar</button>
+        </div>
+
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show router service-name <span class="var-x">SERVICIO</span> arp</span>
+                <span class="command-desc">Verifica resolución ARP de las IP del cliente dentro del VPRN.</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show router service-name SERVICIO arp', event)">Copiar</button>
+        </div>
+
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">show router service-name <span class="var-x">SERVICIO</span> route-table</span>
+                <span class="command-desc">Muestra las rutas aprendidas dentro de la VRF/VPRN.</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('show router service-name SERVICIO route-table', event)">Copiar</button>
+        </div>
+
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text">ping <span class="var-x">IP-CPE</span> router-instance <span class="var-x">SERVICIO</span></span>
+                <span class="command-desc">Prueba conectividad desde el EDGE hacia el gateway o CPE del cliente.</span>
+            </div>
+            <button class="copy-btn" onclick="copyTo('ping IP-CPE router-instance SERVICIO', event)">Copiar</button>
+        </div>
+
+        <div class="command-row">
+            <div class="command-info">
+                <span class="command-text
 
         <!-- SECCIÓN CIENA -->
     <div id="ciena" class="command-section">
